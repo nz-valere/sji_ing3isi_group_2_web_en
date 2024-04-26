@@ -1,0 +1,45 @@
+{
+    "categories": [
+      {
+        "name": "General Knowledge",
+        "questions": [
+          {
+            "question": "What is the capital of France?",
+            "choices": ["London", "Paris", "Berlin", "Rome"],
+            "correct_answer": "Paris"
+          },
+          {
+            "question": "Who wrote 'To Kill a Mockingbird'?",
+            "choices": ["Harper Lee", "J.K. Rowling", "Stephen King"],
+            "correct_answer": "Harper Lee"
+          }
+        ]
+      },
+      {
+        "name": "Science",
+        "questions": [
+          {
+            "question": "What is the chemical symbol for water?",
+            "choices": ["H2O", "CO2", "O2", "H2SO4"],
+            "correct_answer": "H2O"
+          },
+          {
+            "question": "Which planet is known as the 'Red Planet'?",
+            "choices": ["Venus", "Mars", "Jupiter"],
+            "correct_answer": "Mars"
+          }
+        ]
+      },
+      {
+        "name": "Art and Literature",
+        "questions": [
+          {
+            "question": "Who painted the Mona Lisa?",
+            "choices": ["Leonardo da Vinci", "Pablo Picasso", "Vincent van Gogh"],
+            "correct_answer": "Leonardo da Vinci"
+          }
+        ]
+      }
+    ]
+}
+  
