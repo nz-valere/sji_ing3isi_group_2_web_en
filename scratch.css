@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.container h1{
+    font-family: serif;
+    font-weight: 25px;
+    border-bottom: 1px solid;
+    padding: 30px;
+}
+.btn{
+    background: #fff;
+    width: 100%;
+    border: 1px solid #354;
+    margin: 10px 0;
+    padding: 0;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.btn:hover{
+    background: #354;
+}
+.next-button{
+    background: #222;
+    width: 150px;
+    padding: 10px;
+    margin: 20px auto 0;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+}
