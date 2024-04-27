@@ -6,105 +6,32 @@ body{
    background-color: #2179D8 ;
    
 }
-
-#form1{
-   background-color:white;
-   
-    /* opacity: 61%; */
-    border-radius: 10px;
-    width: 1500px;
-    height: 1000px;
-    margin: 4% auto;    
-}
-.question{
-    border-radius:10px; 
-    background-color:white; 
-    width: 1000px;
-    height: 85px;
-    padding: 20px;
-    margin:4% auto;
-    position: absolute;
-    top: 15%;
-    left: 30%; 
-    right: 50%;   
-}
-.answer1{
-    border-radius:10px; 
-    background-color:white;
-    width: 500px;
-    height: 85px;
-    padding: 20px;
-    margin:4% auto;
-    position: absolute;
-    top: 30%;
-    left: 40%;
-}
-.answer1:hover {
-    background-color: #99a3a4;
-}
-.answer2{
-    border-radius:10px; 
-    background-color:white;
-    width: 500px;
-    height: 85px;
-    padding: 20px;
-    margin:4% auto;
-    position: absolute;
-    top: 40%;
-    left: 40%;  
-}
-.answer2:hover {
-    background-color: #99a3a4;
-}
-.answer3{
-    border-radius:20px; 
-    background-color:white;
-    color:black;
-    width: 500px;
-    height: 85px;
-    padding: 20px;
-    margin:4% auto;
-    position: absolute;
-    top: 50%;
-    left: 40%; 
-}
-.answer3:hover {
-    background-color: #99a3a4;
-}
-.answer4{
-    border-radius:10px; 
-    background-color:white;
-    width: 500px;
-    height: 85px;
-    padding: 20px;
-    margin:4% auto;
-    position: absolute;
-    top: 60%;
-    left: 40%;  
-    
-}
-.answer4:hover{
-    background-color:  #99a3a4;
-}
-p{
-    color: black;
-    font-size: 50px;
-    position: absolute;
-    top: 4%;
-    left: 35%; 
-}
-.Q{
-    color: black;
-    font-size: 50px;
-    position: absolute;
-    top: 4%;
-    left: 40%;  
-}
-hr{
-    position: absolute;
-    top: 25%;
-    left: 40%; 
-    
-}
-
+#next{
+    display:none;
+    height: 20px;
+    width: 5%;
+} 
+.btn{
+    /* position: absolute; */ 
+    margin: 10px; 
+    top: 0%;
+    width: 50%;
+    align-content: center;
+    text-align: center;
+   margin: 3% auto;
   
+    
+}
+#answers{
+    display: flex;
+    flex-direction: column;
+    /* width: em; */
+    height: 40vh;
+    top: 60%;
+}
+.isj{
+    text-align: center;
+}
+#question{
+    margin: 10px;
+}
