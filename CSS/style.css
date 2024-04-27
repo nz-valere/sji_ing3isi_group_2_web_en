@@ -21,3 +21,26 @@ img{
     justify-self: unset;
     border-radius: 20px;
 }
+.header{
+    /* text-align:center; */
+    margin: 40px;
+    height: 80px;
+    width: 65%;
+    position: absolute;
+    top: 10%;
+    left: 40%;
+
+ 
+ }
+/* .header1{
+   text-align: center;
+   margin: 40px;
+   height: 80px;
+  
+
+} */
+a{
+    margin: 20px; 
+
+   
+}
