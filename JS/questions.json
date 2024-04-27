@@ -1,0 +1,20 @@
+[
+    {
+        "question": "What does HTML stand for?",
+        "answers": [
+            { "text": "Hyper Text Markup Language", "correct": true },
+            { "text": "Hyperlinks and Text Markup Language", "correct": false },
+            { "text": "Home Tool Markup Language", "correct": false },
+            { "text": "Hyper Transfer Markup Language", "correct": false }
+        ]
+    },
+    {
+        "question": "Which of the following is NOT a JavaScript data type?",
+        "answers": [
+            { "text": "String", "correct": false },
+            { "text": "Boolean", "correct": false },
+            { "text": "Float", "correct": true },
+            { "text": "Object", "correct": false }
+        ]
+    }
+]
