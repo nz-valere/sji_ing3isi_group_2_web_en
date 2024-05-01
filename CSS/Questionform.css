@@ -12,21 +12,27 @@ body{
     width: 5%;
 } 
 .btn{
-    /* position: absolute; */ 
     margin: 10px; 
     top: 0%;
     width: 50%;
     align-content: center;
     text-align: center;
-   margin: 3% auto;
-  
-    
+    margin: 3% auto;   
+}
+.container{
+    background-color: rgb(196, 211, 216);  
+    border-radius: 20px;
+    width: 80%;
+    height: auto;
+    margin: 6% auto;  
+   text-align: center;
+   box-shadow: 2px 5px 10px #1111111f;
+   
 }
 #answers{
     display: flex;
     flex-direction: column;
-    /* width: em; */
-    height: 40vh;
+    height: auto;
     top: 60%;
 }
 .isj{
