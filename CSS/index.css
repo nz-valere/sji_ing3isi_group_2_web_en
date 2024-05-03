@@ -7,7 +7,7 @@ body{
 }
 .bg{
 
-    background-image: url(../Assets/images/123456.svg);
+    background-image: url(../Assets/images/2483019_344201-PAOSFA-79.svg);
     background-size: contain ;
     background-repeat: no-repeat;
     height: 100vh;
@@ -20,14 +20,27 @@ body{
     background-size: contain ;
     background-repeat: no-repeat;
     background-position: right;
+    display: flex;
+    /* align-items: center; */
+    justify-content: end;
 }
 button{
     position: absolute;
     top: 80vh;
-    left: 43%;
+    left: 39%;
     height: 60px;
-    width: 5em;
-    font-size: xx-large;
+    width: auto;
+    font-size: x-large;
     font-family: 'Super Pixel' ;
     cursor: pointer;
+}
+#form{
+    background-color: rgba(250, 235, 215, 0.445);
+    border-radius: 10px;
+    height: 65vh;
+    width: 42%;
+    /* margin-left: 40%; */
+    margin-right: 2%;
+    margin-top: 30px;
+    display:none;
 }
