@@ -1,0 +1,33 @@
+body{
+    padding: 0;
+    margin: 0;
+    background-color: #874CCC;
+    /* position: fixed; */
+    font-family: super
+}
+.bg{
+
+    background-image: url(../Assets/images/123456.svg);
+    background-size: contain ;
+    background-repeat: no-repeat;
+    height: 100vh;
+    /* width: ; */
+}
+.db{
+    background-image: url('../Assets/images/Group 123.svg');
+    height: 100vh;
+    width: 100%;
+    background-size: contain ;
+    background-repeat: no-repeat;
+    background-position: right;
+}
+button{
+    position: absolute;
+    top: 80vh;
+    left: 43%;
+    height: 60px;
+    width: 5em;
+    font-size: xx-large;
+    font-family: 'Super Pixel' ;
+    cursor: pointer;
+}

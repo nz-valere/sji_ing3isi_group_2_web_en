@@ -1,20 +1,122 @@
-[
-    {
-        "question": "What does HTML stand for?",
-        "answers": [
-            { "text": "Hyper Text Markup Language", "correct": true },
-            { "text": "Hyperlinks and Text Markup Language", "correct": false },
-            { "text": "Home Tool Markup Language", "correct": false },
-            { "text": "Hyper Transfer Markup Language", "correct": false }
-        ]
-    },
-    {
-        "question": "Which of the following is NOT a JavaScript data type?",
-        "answers": [
-            { "text": "String", "correct": false },
-            { "text": "Boolean", "correct": false },
-            { "text": "Float", "correct": true },
-            { "text": "Object", "correct": false }
-        ]
-    }
-]
+{
+  "Sports": {
+    "name": "Sports",
+    "questions": [
+      {
+        "question": "Who won the FIFA World Cup in 2018?",
+        "choices": ["France", "Brazil", "Germany", "Argentina"],
+        "correct_answer": "France"
+      },
+      {
+        "question": "Which athlete has won the most Olympic gold medals?",
+        "choices": ["Michael Phelps", "Usain Bolt", "Larisa Latynina", "Carl Lewis"],
+        "correct_answer": "Michael Phelps"
+      },
+      {
+        "question": "Which sport uses the term 'Love' to represent zero points?",
+        "choices": ["Tennis", "Golf", "Cricket", "Badminton"],
+        "correct_answer": "Tennis"
+      }
+    ]
+  },
+  "Culture": {
+    "name": "Culture",
+    "questions": [
+      {
+        "question": "Who painted the Mona Lisa?",
+        "choices": ["Leonardo da Vinci", "Pablo Picasso", "Vincent van Gogh", "Michelangelo"],
+        "correct_answer": "Leonardo da Vinci"
+      },
+      {
+        "question": "Which country is famous for Bollywood?",
+        "choices": ["India", "China", "USA", "France"],
+        "correct_answer": "India"
+      },
+      {
+        "question": "Which novel is authored by George Orwell?",
+        "choices": ["1984", "Brave New World", "Fahrenheit 451", "Animal Farm"],
+        "correct_answer": "1984"
+      }
+    ]
+  },
+  "Music": {
+    "name": "Music",
+    "questions": [
+      {
+        "question": "Who is known as the 'King of Pop'?",
+        "choices": ["Michael Jackson", "Elvis Presley", "Prince", "Madonna"],
+        "correct_answer": "Michael Jackson"
+      },
+      {
+        "question": "Which band released the album 'The Dark Side of the Moon'?",
+        "choices": ["Pink Floyd", "Led Zeppelin", "The Beatles", "Queen"],
+        "correct_answer": "Pink Floyd"
+      },
+      {
+        "question": "Who is the lead vocalist of the band Queen?",
+        "choices": ["Freddie Mercury", "Roger Waters", "John Lennon", "Paul McCartney"],
+        "correct_answer": "Freddie Mercury"
+      }
+    ]
+  },
+  "Science": {
+    "name": "Science",
+    "questions": [
+      {
+        "question": "What is the chemical symbol for water?",
+        "choices": ["H2O", "CO2", "O2", "CH4"],
+        "correct_answer": "H2O"
+      },
+      {
+        "question": "Who developed the theory of relativity?",
+        "choices": ["Albert Einstein", "Isaac Newton", "Galileo Galilei", "Stephen Hawking"],
+        "correct_answer": "Albert Einstein"
+      },
+      {
+        "question": "What is the largest organ in the human body?",
+        "choices": ["Skin", "Liver", "Brain", "Heart"],
+        "correct_answer": "Skin"
+      }
+    ]
+  },
+  "History": {
+    "name": "History",
+    "questions": [
+      {
+        "question": "Who was the first president of the United States?",
+        "choices": ["George Washington", "Thomas Jefferson", "Abraham Lincoln", "John Adams"],
+        "correct_answer": "George Washington"
+      },
+      {
+        "question": "Which ancient civilization built the Great Pyramids of Giza?",
+        "choices": ["Ancient Egyptians", "Ancient Greeks", "Mayans", "Romans"],
+        "correct_answer": "Ancient Egyptians"
+      },
+      {
+        "question": "Which war is known as the 'Great War'?",
+        "choices": ["World War I", "World War II", "Vietnam War", "Korean War"],
+        "correct_answer": "World War I"
+      }
+    ]
+  },
+  "Computer Science": {
+    "name": "Computer Science",
+    "questions": [
+      {
+        "question": "What does 'HTML' stand for?",
+        "choices": ["Hypertext Markup Language", "Hyperlinks and Text Markup Language", "Home Tool Markup Language", "Hyper Text Multiple Language"],
+        "correct_answer": "Hypertext Markup Language"
+      },
+      {
+        "question": "Who is known as the father of modern computer science?",
+        "choices": ["Alan Turing", "Bill Gates", "Steve Jobs", "Tim Berners-Lee"],
+        "correct_answer": "Alan Turing"
+      },
+      {
+        "question": "Which programming language is often used for artificial intelligence?",
+        "choices": ["Python", "Java", "C++", "JavaScript"],
+        "correct_answer": "Python"
+      }
+    ]
+  }
+}
