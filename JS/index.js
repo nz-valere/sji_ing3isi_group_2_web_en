@@ -21,3 +21,7 @@ $(document).ready(function() {
         }
     });
 });
+$('.zz').on('click', function(){
+    $('.signup-container').slideToggle().animate({fontSize: '15px'});
+    $('#login-container').css('display','none');
+});
