@@ -7,8 +7,8 @@ body{
    
 }
 #next{
-    display:none;
-    height: 20px;
+    
+    height: 20px;display:none;
     width: 5%;
 } 
 .btn{
