@@ -1,25 +1,42 @@
-const questions = [
-    {
-        question: "What does HTML stand for?",
-        answers: [
-            { text: "Hyper Text Markup Language", correct: true },
-            { text: "Hyperlinks and Text Markup Language", correct: false },
-            { text: "Home Tool Markup Language", correct: false },
-            { text: "Hyper Transfer Markup Language", correct: false }
-        ]
-    },
-    {
-        question: "Which of the following is NOT a JavaScript data type?",
-        answers: [
-            { text: "String", correct: false },
-            { text: "Boolean", correct: false },
-            { text: "Float", correct: true },
-            { text: "Object", correct: false }
-        ]
-    },
-    // Add other questions here...
-];
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+    if(this.readyState == 4 || this.status == 200){
+        var response = JSON.parse(xhttp.responseText)
+        cat = response.categories
+        console.log(cat)
+        selectCategory(cat)
+    }
+}
+xhttp.open("GET","questions.json",true)
+xhttp.send()
 
+function selectCategory(category) {
+    // currentCategory = category;
+    for (const iterator of category) {
+        div = document.createElement('div')
+        div.classList.add('category-buttons')
+        div.innerHTML = iterator.name;
+        selectCat.append(div)
+        div.addEventListener('click', function(){
+            console.log(this.innerHTML);
+            quizContainer.style.display = "block";
+            categorySelectionContainer.style.display = "none";
+            switch (this.innerHTML) {
+                case 'Sports':
+                    currentCategory = category[0]
+                    displayQuestion(currentCategory.questions[0]);
+                    break;
+                case 'Culture':
+                    currentCategory = category[1]
+                    displayQuestion(currentCategory.questions[0]);
+                default:
+                    break;
+            }
+            
+        })
+        // categorySelectionContainer.innerHTML = iterator.name;
+    }
+}
 const questionElement = document.getElementById("question");
 const answerButtons = document.getElementById("answers");
 const nextButton = document.getElementById("next");

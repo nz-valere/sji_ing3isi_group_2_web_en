@@ -5,6 +5,7 @@ body{
     background-color: #874CCC;
     margin: 0;
     padding: 0;
+    font-family: 'Poppins';
 }
 .container{
     background-color: rgb(196, 211, 216);  
@@ -17,46 +18,27 @@ body{
     /* justify-content: center; */
     padding-inline: 40px;
 }
-.quiz{
-    padding-top: 10px;
-}
-p{
-    margin: 0px;
-}
-.quiz1{
+.big{
     display: flex;
-    flex-direction: column;
-    height: 60vh;
-    width: 28%;
-    background-color: antiquewhite;
-    border-radius: 5px;
-    margin-top: 1%;
-    padding: 10px;
-    justify-content: space-between;
+    justify-content: center;
 }
-#Play{
-    margin-inline: auto;
-    width: 9em;
-    border-radius: 5px;
-    border: none;
-    /* text-align: center; */
+.sbig{
+    width: 40%;
 }
-.category{
+#Players{
+    margin-top: 40px;
     height: 30vh;
-    background-color: aquamarine;
+    background-color: blanchedalmond;
+    border-radius: 10px;
+    box-shadow: 2px 5px 10px #1111111f;
+
 }
-.van{
-    height: 40px;
-    border-radius: 0px 0px 20px 20px;
-    background-color: transparent;
- }
- .score{
-    background-color: #874CCC;
-    height: 30vh;
-    width: 30%;
- }
- .categories{
-    background-color: white;
-    height: 30vh;
-    width: 30%;
- }
+.description{
+    width: 60%;
+}
+.imgs{
+    height: 28vh;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+}
