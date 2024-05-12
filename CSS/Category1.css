@@ -5,6 +5,7 @@ body{
     background-color: #874CCC;
     margin: 0;
     padding: 0;
+    font-family: 'Poppins';
 }
 .parent {
    /*width: 100%;  Set your desired width */
@@ -40,6 +41,7 @@ body{
    margin-top: 30px; 
 }
 
+
  .small-container {
    padding-left: 5px;
    border: 1px solid #ddd;
@@ -68,8 +70,7 @@ body{
  max-height: 50px;
  display: block;
  margin: 0 auto;
-
-}
+ }
 
 .cattype1{
  text-align: center;
