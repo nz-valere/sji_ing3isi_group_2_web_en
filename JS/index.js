@@ -6,7 +6,22 @@ $(document).ready(function() {
 
     let db;
 
+    function deleteDatabase() {
+        console.log("Deleting existing database...");
+        const deleteRequest = indexedDB.deleteDatabase("UserIdDB");
+
+        deleteRequest.onerror = function(event) {
+            console.log("Error deleting database:", event);
+        };
+
+        deleteRequest.onsuccess = function(event) {
+            console.log("Database deleted successfully");
+            initializeDatabase();
+        };
+    }
+
     function initializeDatabase() {
+        console.log("Initializing database...");
         const request = indexedDB.open("UserIdDB", 1);
 
         request.onerror = function(event) {
@@ -26,13 +41,14 @@ $(document).ready(function() {
 
         request.onsuccess = function(event) {
             db = event.target.result;
-            console.log("Database initialized successfully");
+            console.log("Database initialized successfully", db.objectStoreNames);
             bindFormEvents();
         };
     }
 
     function bindFormEvents() {
         function addUser(username, password) {
+            console.log("Adding user:", username);
             if (!db.objectStoreNames.contains("Users")) {
                 console.log("Object store 'Users' does not exist.");
                 return;
@@ -65,6 +81,7 @@ $(document).ready(function() {
         }
 
         function getUser(username, password, callback) {
+            console.log("Getting user:", username);
             if (!db.objectStoreNames.contains("Users")) {
                 console.log("Object store 'Users' does not exist.");
                 callback(false);
@@ -131,5 +148,6 @@ $(document).ready(function() {
         });
     }
 
-    initializeDatabase();
+    // Delete the existing database and reinitialize
+    deleteDatabase();
 });
