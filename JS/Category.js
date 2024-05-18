@@ -9,7 +9,8 @@ function displayDescription(description) {
 }
 function handleCategoryClick(category) {
     describtionDiv.innerHTML = category.description;
-    describtionDivImg.setAttribute('src',`../Assets/images/${category.name}.jpg`).toggle()
+    describtionDivImg.setAttribute('src',`../Assets/images/${category.name}.jpg`)
+    window.location.href = `../HTML/QUESTIONFORM.html?category=${category.name}`;
 }
 xhttp.onreadystatechange = function() {
     if(this.readyState == 4){

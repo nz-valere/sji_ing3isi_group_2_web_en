@@ -14,15 +14,32 @@
         <h1 class="isj">ISJ Quiz</h1>
         <hr>
         <div class="quiz">
-            <h2 id="question">Question here</h2>
-            <div id="answers">
-                <!-- answers here -->
+            <div class="timer">
+                <div class="progress">
+                    <div class="progress-bar"></div>
+                    <div class="progress-text">50</div>
+                    <div class="number">
+                        Question <span class="current">1</span><span class="total">/10</span>
+                    </div>
+                    <h2 id="question">Question here</h2>
+                    <div id="answers">
+                        <!-- answers here -->
+                    </div>
+                <button id="next" class="next-button">Next</button>
+                </div>
             </div>
-            <button id="next" class="next-button">Next</button>
+        </div>
+        <div class="score">
+            <span class="score-text">Your score:</span>
+            <div>
+                <span class="final-points">0</span>
+                <span class="total-points">/30</span>
+            </div>
+            <button class="btn restart">Restart Quiz</button>
         </div>
     </div>
-    
-    <script src="./jquery-3.7.1.min.js"></script> 
+    <script src="../JS/Questionform.js"></script>
+    <script src="../Assets/jquery-3.7.1.min.js"></script> 
     <script src="../JS/Category.js"></script> 
 </body>
 
