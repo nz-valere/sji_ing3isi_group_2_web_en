@@ -21,8 +21,8 @@ xhttp.onreadystatechange = function() {
         for (const iterator of cat) {
             var div = document.createElement('div')
             div.classList.add('category-btn')
-            div.innerHTML = iterator.name
-            catList.append(div)
+            div.innerHTML = iterator.name;
+            catList.append.div;
             div.addEventListener('click', () => handleCategoryClick(iterator));
         }
         // selectCategory(cat)

@@ -68,6 +68,8 @@ $(document).ready(function() {
                     addUserRequest.onsuccess = function() {
                         console.log("User added successfully!");
                         alert(`User ID '${username}' added to the database successfully!`);
+                        sessionStorage.setItem('username', username); // Temporarily store the username
+                        window.location.href = '../HTML/Home.html'; // Redirect to home.html
                     };
                     addUserRequest.onerror = function(event) {
                         console.log("Error adding user.", event);
@@ -115,7 +117,8 @@ $(document).ready(function() {
             const confirmPassword = $("#signup-confirm-password").val();
 
             if (password !== confirmPassword) {
-                alert("Passwords do not match. Please try again.");
+                $("#error_message").text("Passwords do not match. Please try again.");
+                // alert("Passwords do not match. Please try again.");
                 return;
             }
 
@@ -131,6 +134,8 @@ $(document).ready(function() {
             getUser(username, password, function(isValid) {
                 if (isValid) {
                     alert("Login successful!");
+                    sessionStorage.setItem('username', username); // Temporarily store the username
+                    window.location.href = '../HTML/Home.html';                    // Redirect to home.html
                 } else {
                     $("#error-message").text("Invalid username or password. Please try again.");
                 }
@@ -149,5 +154,6 @@ $(document).ready(function() {
     }
 
     // Delete the existing database and reinitialize
-    deleteDatabase();
+    initializeDatabase();
+    // deleteDatabase();
 });

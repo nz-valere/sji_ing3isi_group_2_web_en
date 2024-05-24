@@ -1,21 +1,31 @@
 body{
-    /* background-color: #2179D8; */
-    background-image: url(../Assets/images/Path\ 409.svg);
+  background-color: #874CCC;
+  margin: 0;
+  padding: 0;
+  /* background-image: url(../Assets/images/Groupe\ 124@2x.png); */
+  background-size: contain ;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; 
+  width: 100vw;   
+  /* background-image: url(../Assets/images/Path\ 409.svg); */
     /* background-size: cover; */
-    background-repeat: no- rgb(196, 211, 216)repeat;
-    background: linear-gradient(to bottom,hsl(252, 100%, 67%),#2e2be9);
+    background-repeat: no-repeat;
+    background: linear-gradient(to bottom,#2e2be9,hsl(252, 100%, 67%));
 }
-.container{
-    background-color:white;  
-    border-radius: 20px;
-    width: 80%;
-    height: 80dvh;
-    margin: 6% auto;  
-   /* text-align: center; */
-   box-shadow: 2px 5px 10px #1111111f;
-   display: flex;  
-   top: 10%;
-   left: 20%;
+.container {
+  width: 90%;
+  height: 90vh;
+  background-color: transparent;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.174);
+  overflow: hidden;
+  box-sizing: border-box;
+  padding-top: 10px;
 }
  
 a{
@@ -23,30 +33,21 @@ a{
     text-decoration: none;   
 }
 img{
-    height: 80vh;
-    width: 80vh;
-    justify-self: unset;
+    height: 100%;
+    width: auto;
     border-radius: 20px;
     top: 80%;
     left: 20%;
 }
 .menu {
-    /* width: 20%; */
     height: 5%; 
-    /* background-color: lightgray; */
-    /* flex-direction: row; */
-     margin: 30px; 
-    /* height: 80px; */
-    width: 65%;
+    margin: 30px; 
     position: absolute;
     top: 5%;
     left: 50%;
     text-decoration:chartreuse;
   }
-
-  
   .menu ul {
-  
     padding: 0;
     margin: 0;
   }
@@ -56,13 +57,6 @@ img{
     padding: 10px;
    
   }
-    /* .menu li:hover{
-    background-color:lightcoral; 
-    border-radius: 15%;
-    border: #1111111f;
-    mask-position: 7%; 
-   
-  }   */
   .menu a {
     text-decoration:chartreuse;
     color: black;

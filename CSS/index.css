@@ -98,7 +98,7 @@ input[type="password"] {
     background-color: #0056b3;
 } */
 
-#error-message {
+#error-message, #error_message {
     color: red;
     text-align: center;
 }

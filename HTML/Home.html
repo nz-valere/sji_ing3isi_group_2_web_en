@@ -9,56 +9,81 @@
 </head>
 <body>
   <div class="container">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary van">
-      <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="Home.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="Score.html">score</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="Category1.html"  >
-                categories
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
+    <aside class="sidebar">
+      <div class="logo">
+          <img src="logo.png" alt="profile">
       </div>
-    </nav> 
-      <!-- <img src="../Assets/images/quizimg.svg" alt=""> -->
+      <nav>
+          <ul>
+              <li><a href="../HTML/Category1.html"><i class="fas fa-users"></i> Categories</a></li>
+              <li><a href="../HTML/Score.html"><i class="fas fa-calendar-alt"></i> Scores</a></li>
+              <li class="active"><a href="#"><i class="fas fa-user-friends"></i> Membres</a></li>
+              <li><a href="#"><i class="fas fa-wallet"></i> Wallet</a></li>
+          </ul>
+      </nav>
+  </aside>
       <div class="quiz">
-        <p id="user">Welcome, </p>
-        <h2>let's Play!</h2>
-        <div class="disp">
-          <div class="quiz1">
-            <div class="category">
-
+        <span>Welcome, </span><span id="user"></span>
+        <h2>Let's Play!</h2>
+        <div class="cont">
+          <div class="left"> 
+            <!-- i want a carrousel here..! -->
+            <!-- <h5>Categories here</h5> -->
+            <div class="ctegory">
+              <div class="cat">Culture</div>
+              <div class="cat">Science</div> 
+              <div class="cat">Music, </div> 
+              <div class="cat">History</div> 
+              <div class="cat">Computer Science</div> 
             </div>
-            <a href="QUESTIONform.html"><button id="Play">Play now!</button></a>
+            <div class="available">
+               <div class="friend1">
+                <div class="profile">
+                  <img src="profile.jpg" alt="Profile Picture">
+                  <p>David Akadje</p>
+                </div>
+               </div>
+               <div class="friend2">
+                <div class="profile">
+                  <img src="profile.jpg" alt="Profile Picture">
+                  <p>David Akadje</p>
+                </div>
+               </div>
+            </div>
           </div>
-          <div class="right">
-            <div class="score">
-            score
+          <aside class="Leaderboard">
+            <p style="text-align: center;">Leaderboard</p>
+            <div class="leaders">
+              <div id="two">
+                <div class="rank">#2</div>
+                <div class="name"></div>
+              </div>
+              <div id="one">
+                <div class="rank">#1</div>  
+                <div class="name"></div>          
+              </div>
+              <div id="third">
+                <div class="rank">#3</div>
+                <div class="name"></div>  
+              </div>
             </div>
-            <div class="categories">
-                <div class="tit">categories here</div>
-                <div class="ctegory">
-                  <a class="cat" href="Category1.html">Sport</a>
-                  <div class="cat">Culture</div>
-                  <div class="cat">Science</div> 
-                </div>  
+            <div class="others">
+              <div class="player">
+                <div id="group">
+                  <span class="rank">#4</span>
+                  <span class="name">val</span>
+                </div>
+                <div id="points">300pts</div>
+              </div>
+              <div class="player">
+                <div id="group">
+                  <span class="rank">#4</span>
+                  <span class="name">val</span>
+                </div>
+                <div id="points">300pts</div>
+              </div>
             </div>
-        </div>
+          </aside>
         </div>
       </div>
     </div>
