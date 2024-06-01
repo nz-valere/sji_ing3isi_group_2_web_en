@@ -1,69 +1,105 @@
-// let question =[],
-//     time = 30;
-//     score = 0,
-//     currentQuestion,
-//     timer;
+const questionsElement = $("#question");
+const answersElement = $("#answers");
+const questionNumberElement = $(".current");
+const totalQuestionsElement = $(".total");
+const progressBar = $(".progress-bar");
+const progressText = $(".progress-text");
+const scoreElement = $(".final-points");
+const scoreTextElement = $(".score-text");
+const scoreContainer = $(".score");
+const quizContainer = $(".quiz");
 
+let questions = [];
+let currentQuestionIndex = 0;
+let time = 10;
+let score = 0;
+let timer;
 
-// const progressBar = document.querySelector(".progress-bar"),
-//     progressText = document.querySelector(".progress-text");
-
-//     fetch('questions.json')
-//     .then((res)=> res.json())
-//     .then((data)=>{
-//         question = data.results;
-//         console.log(question);
-//     });
-
-// const progress = (value) =>{
-//     const percentage = (value/time) *100;
-//     progressBar.style.width = `${percentage}%`;
-//     prgressText.innerHTML = `${value}`;
-//     // progressBar.getElementsByClassName
-// };
-
-// // chose the category to play
-// const category = document.querySelector('category')
-
-// const startQuiz = () =>{
-//     const cat = category.value;
-
-
-// }
-
-// Define variables
-let question = [],
-    time = 30,
-    score = 0,
-    currentQuestion,
-    timer;
-
-const progressBar = document.querySelector(".progress-bar"),
-      prgressText = document.querySelector(".progress-text");
-
-
-// Define progress function
-const progress = (value) =>{
-    const percentage = (value/time) *100;
-    progressBar.style.width = `${percentage}%`;
-    prgressText.innerHTML = `${value}`;
-    // progressBar.getElementsByClassName
+// Function to update the progress bar
+const updateProgress = (value) => {
+    progressText.text(`${value}`)
+    const percentage = (value / time) * 100;
+    progressBar.css("width", `${percentage}%`);
 };
 
-// Define category
-const category = document.querySelector('category');
 
-// Define startQuiz function
-const startQuiz = () =>{
-    const cat = category.value;
-    // my logic for starting the quiz
-    // Fetch questions
-    fetch('questions.json')
-    .then((res)=> res.json())
-    .then((data)=>{
-        question = data.results;
-        console.log(question);
-        score.style.display = 'none';
+// Function to load the next question
+const loadQuestion = () => {
+    if (currentQuestionIndex < questions.length) {
+        const currentQuestion = questions[currentQuestionIndex];
+        questionsElement.text(currentQuestion.question);
+        answersElement.empty();
+
+        currentQuestion.choices.forEach((choice) => {
+            const answerButton = $(`<button class="answer">${choice}</button>`);
+            answerButton.on("click", () => checkAnswer(choice, currentQuestion.correct_answer));
+            answersElement.append(answerButton);
+        });
+
+        questionNumberElement.text(currentQuestionIndex + 1);
+        totalQuestionsElement.text(questions.length);
+        resetTimer();
+    } else {
+        endQuiz();
+    }
+};
+
+// Function to check the selected answer
+const checkAnswer = (selectedAnswer, correctAnswer) => {
+    if (selectedAnswer === correctAnswer) {
+        score += 3;
+        // scoreElement.text(score);
+        scoreTextElement.text(`Your score: ${score}`);
+    }
+    currentQuestionIndex++;
+    changeBackgroundColor();
+    loadQuestion();
+};
+
+// Function to reset the timer for each question
+const resetTimer = () => {
+    clearInterval(timer);
+    time = 15;
+    updateProgress(time);
+
+    timer = setInterval(() => {
+        time--;
+        updateProgress(time);
+        if (time <= 0) {
+            clearInterval(timer);
+            currentQuestionIndex++;
+            loadQuestion();
+        }
+    }, 1000);
+};
+
+// Function to change the background color with animation
+const changeBackgroundColor = () => {
+    $("body").css("transition", "background-color 0.5s");
+    const colors = ["#f8b195", "#f67280", "#c06c84", "#6c5b7b", "#355c7d"];
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    $("body").css("background-color", randomColor);
+};
+
+// Function to end the quiz and show the score
+const endQuiz = () => {
+    clearInterval(timer);
+    quizContainer.hide();
+    scoreContainer.show();
+    scoreTextElement.text(`You scored ${score} out of --`);
+};
+
+const startQuiz = () => {
+    $.getJSON('../HTML/questions.json', (data) => {
+        questions = data.categories[0].questions;
+    }).fail(() => {
+        console.log('Error');
+    }).then(() => {
+        loadQuestion();
     });
-
 };
+
+$(document).ready(() => {
+    scoreContainer.hide();
+    startQuiz();
+});
