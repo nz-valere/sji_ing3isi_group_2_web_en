@@ -3,73 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peer.js Dynamic Connection Example</title>
-    <script src="https://cdn.jsdelivr.net/npm/peerjs@1.3.2/dist/peerjs.min.js"></script>
-    <style>
-        #friend1, #friend2 {
-            border: 1px solid black;
-            padding: 10px;
-            margin: 10px;
-        }
-    </style>
+    <title>Quiz Card</title>
+    <link rel="stylesheet" href="qww.css">
 </head>
 <body>
-    <div id="friend1">Friend 1: Waiting for connection...</div>
-    <div id="friend2">Friend 2: Waiting for connection...</div>
-    <script>
-        // Create a new Peer instance
-        const peer = new Peer();
-
-        // List of available peers
-        let availablePeers = [];
-
-        // Display the peer ID
-        peer.on('open', function(id) {
-            document.getElementById('friend1').innerHTML = `Friend 1: Your ID is ${id}`;
-            broadcastAvailability(id);
-        });
-
-        // Handle incoming connections
-        peer.on('connection', function(conn) {
-            conn.on('open', function() {
-                document.getElementById('friend2').innerHTML = `Friend 2: Connected to ${conn.peer}`;
-                conn.on('data', function(data) {
-                    console.log('Received', data);
-                });
-                conn.send('Hello from Friend 1!');
-            });
-        });
-
-        // Function to broadcast availability
-        function broadcastAvailability(id) {
-            const ws = new WebSocket('ws://your-signaling-server-address');
-            ws.onopen = () => {
-                ws.send(JSON.stringify({ type: 'available', id }));
-            };
-            ws.onmessage = (message) => {
-                const data = JSON.parse(message.data);
-                if (data.type === 'available') {
-                    availablePeers.push(data.id);
-                    if (data.id !== id) {
-                        connectToPeer(data.id);
-                    }
-                }
-            };
-        }
-
-        // Function to connect to another peer
-        function connectToPeer(peerId) {
-            if (peerId === peer.id) return; // Avoid connecting to self
-            const conn = peer.connect(peerId);
-            conn.on('open', function() {
-                document.getElementById('friend2').innerHTML = `Friend 2: Connected to ${peerId}`;
-                conn.on('data', function(data) {
-                    console.log('Received', data);
-                });
-                conn.send('Hello from Friend 1!');
-            });
-        }
-    </script>
-    <script src="../JS/side.js"></script>
+    <div class="quiz-card">
+        <div class="question-mark">?</div>
+        <div class="question">What is the largest planet in the solar system?</div>
+        <div class="choices">
+            <div class="choice">a. Venus</div>
+            <div class="choice">c. Mercury</div>
+            <div class="choice correct">b. Jupiter</div>
+            <div class="choice">d. Saturn</div>
+        </div>
+    </div>
 </body>
 </html>

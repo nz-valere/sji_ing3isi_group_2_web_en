@@ -22,6 +22,7 @@ const updateProgress = (value) => {
     progressBar.css("width", `${percentage}%`);
 };
 
+// updateProgress()
 
 // Function to load the next question
 const loadQuestion = () => {
@@ -59,7 +60,7 @@ const checkAnswer = (selectedAnswer, correctAnswer) => {
 // Function to reset the timer for each question
 const resetTimer = () => {
     clearInterval(timer);
-    time = 15;
+    time = 10;
     updateProgress(time);
 
     timer = setInterval(() => {

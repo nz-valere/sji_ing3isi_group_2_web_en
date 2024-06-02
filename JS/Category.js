@@ -1,9 +1,10 @@
-var cat
+// const category
 const catList = document.getElementById('category-list')
 const describtionDiv = document.querySelector('.description p')
 const describtionDivImg = document.querySelector('.description img')
+const ul = $("<ul class ='list-group'></ul>") 
+const cat = $('.Category-list')
 
-var xhttp = new XMLHttpRequest();
 function displayDescription(description) {
     
 }
@@ -12,25 +13,25 @@ function handleCategoryClick(category) {
     describtionDivImg.setAttribute('src',`../Assets/images/${category.name}.jpg`)
     window.location.href = `../HTML/QUESTIONFORM.html?category=${category.name}`;
 }
-xhttp.onreadystatechange = function() {
-    if(this.readyState == 4){
-        var response = JSON.parse(xhttp.responseText)
-        cat = response.categories
-        console.log(response)
-        console.log(cat)
-        for (const iterator of cat) {
-            var div = document.createElement('div')
-            div.classList.add('category-btn')
-            div.innerHTML = iterator.name;
-            catList.append.div;
-            div.addEventListener('click', () => handleCategoryClick(iterator));
-        }
-        // selectCategory(cat)
+$.getJSON('../HTML/questions.json', function(data){
+
+})
+const loadCategory = function(category){
+    for (const iterator of category){
+        ul.append(`<li class = 'list-group-item list-group-item-action'>${iterator.name}</li>`)
+        console.log(ul);
     }
+    cat.append(ul)
+    console.log(cat);
 }
-xhttp.open("GET","../HTML/questions.json",true)
-xhttp.send()
 
 console.log("Home");
 
-
+$(document).ready(function(){
+    $.getJSON('../HTML/questions.json', function(data){
+        category = data.categories
+        // console.log(category);
+        loadCategory(category)
+    })
+    
+})
