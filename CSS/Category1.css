@@ -2,10 +2,14 @@
 
 body{
     /* background: linear-gradient(to bottom right, #ff0000, #ffffff); */
-    background-color: #874CCC;
+    background-color: #9253dab0;
     margin: 0;
     padding: 0;
     font-family: 'Poppins';
+    background-image: url(../Assets/images/History.png);
+    background-size: cover; /* Make sure the image covers the entire container */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
 }
 .parent {
    border: 1px solid #ccc;
@@ -15,7 +19,7 @@ body{
    box-shadow: 2px 5px 10px #1111111f;
    padding-inline: 40px;
    border-radius: 10px;
-   background-color:white ;
+   background-color:rgba(255, 255, 255, 0.58) ;
    overflow: hidden;
 
  }
@@ -27,7 +31,7 @@ body{
 
  }
  .child-container {
-  width: auto;
+  width: 130px;
   height: 30vw; /* Fill the available height */
   overflow-y: scroll; /* Enable vertical scrolling */
   background-color: #fdf4f41f;  
@@ -37,7 +41,8 @@ body{
 
 
 .small-container {
-   padding-left: 5px;
+   padding-inline: 5px 5px;
+   margin-right: 10px;
    border: 1px solid #ddd;
    margin-bottom: 10px;
    background-color:transparent;  
@@ -59,7 +64,8 @@ body{
  .small-container:hover, .small-container:focus {
  box-shadow: 0 10px 15px rgba(50, 50, 93, 0.12);
  background-color: rgba(152, 160, 152, 0.769);
- /* font-family: super pixel; */
+ height: 85px;
+ width: 105px;
  font-weight: bolder; }
 
 

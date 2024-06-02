@@ -25,9 +25,9 @@ $(document).ready(function(){
       $('#History').hide();
       $('#Computer').hide();
       $('h4').html(`You choosed: <strong>${click}</strong>`).slideToggle();
-      $('body').css('backgroundColor','gold');
+      $('body').css('backgroundImage',`url(../Assets/images/${click}.png)`);
       $(`#${click}`).slideToggle().animate({fontSize: '15px'});
-      $('.img img').attr('src',`../Assets/images/${click}.jpg`);
+      $('.img img').attr('src',`../Assets/images/${click}.png`);
     })
   })
   
