@@ -16,6 +16,7 @@ body{
    padding-inline: 40px;
    border-radius: 10px;
    background-color:white ;
+   overflow: hidden;
 
  }
 
@@ -71,17 +72,18 @@ a{
 }
 .grand{
   display: flex;
-  /* align-items: baseline; */
   overflow: hidden;
   /* background-color: #371cd4; */
   height: auto;
-  /* width: 100%; */
 }
-.listgroup{
+/* .listgroup{
   overflow-y: auto;
-}
+} */
 #Sports, #Culture, #Music, #Science, #History, #Computer{
   display: none;
+  color: #874CCC;
+  font-family: super pixel;
+  
 }
 .img{
   margin-left: 70px;

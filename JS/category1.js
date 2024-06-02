@@ -17,11 +17,17 @@ $(document).ready(function(){
     $('.small-container').on('click', function(){
       var click = $(this).text();
       console.log(click);
-      $('h4').html('<strong>"click"</strong>');
-      $('body').css('backgroundColor','orange');
-      $('#Sports').slideToggle().animate({fontSize: '25px'});
-      $('.img img').attr('src','../Assets/images/Sports.jpg');
-      console.log('hello');
+      $('h4').css('display', 'none')
+      $('#Sports').hide();
+      $('#Culture').hide();
+      $('#Music').hide();
+      $('#Science').hide();
+      $('#History').hide();
+      $('#Computer').hide();
+      $('h4').html(`You choosed: <strong>${click}</strong>`).slideToggle();
+      $('body').css('backgroundColor','gold');
+      $(`#${click}`).slideToggle().animate({fontSize: '15px'});
+      $('.img img').attr('src',`../Assets/images/${click}.jpg`);
     })
   })
   
