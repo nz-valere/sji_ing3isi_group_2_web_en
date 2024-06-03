@@ -37,6 +37,7 @@ body{
 .quiz{
 
     width: 100%;
+    margin-bottom: 100%;
 }
 p{
     margin: 0px;
@@ -53,10 +54,11 @@ p{
     background-color: white;
 }
 .van{
-    height: 40px;
-    border-radius: 0px 0px 20px 20px;
-    background-color: transparent;
- }
+   height: 40px;
+   width: 30%;
+   border-radius: 0px 0px 20px 20px;
+   background-color: transparent;
+}
  .cont{
     margin-top: 1%;
     display: flex;
@@ -87,6 +89,9 @@ p{
      flex-direction: column;
      padding: 20px;
      border-radius: 10px;
+     position: relative;
+     left: -5%;
+     top: 10%;
  }
  .leaders{
     display: flex;
@@ -131,10 +136,12 @@ p{
     margin-top: 5px;
 }
 .available{
-   width: 100%;
+   width: 50%;
    height: 30vh;
    display: flex;
    justify-content: space-between;
+   position: absolute;
+   top: 60%;
 }
 .friend1, .friend2{
    width: 45%;
@@ -151,7 +158,9 @@ p{
     background-color: rgba(255, 255, 255, 0.763); 
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.194);
     border-radius: 10px;
-    margin-bottom: 40px;
+    margin-bottom: 600%;
+    position: absolute;
+ top: 20%;
  }
 .cat{
     height: 18vh;
@@ -159,4 +168,12 @@ p{
     background-color: rgba(127, 255, 212, 0.571);
     border-radius: 10px;
     margin: 5px;
+}
+h2{
+   position: absolute;
+   bottom: 10%;
+}
+.Welcome{
+   position: absolute;
+   top: 30%;
 }
