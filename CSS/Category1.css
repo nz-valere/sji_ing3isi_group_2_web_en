@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
 
 body{
-    /* background: linear-gradient(to bottom right, #ff0000, #ffffff); */
     background-color: #9253dab0;
     margin: 0;
     padding: 0;
@@ -21,7 +20,6 @@ body{
    border-radius: 10px;
    background-color:rgba(255, 255, 255, 0.58) ;
    overflow: hidden;
-
  }
 
  .van{
@@ -72,24 +70,16 @@ body{
 .cattype1, .cathead, .catdir{
  text-align: center;
 }
-
-a{
-   text-decoration: none;
-}
 .grand{
   display: flex;
   overflow: hidden;
   /* background-color: #371cd4; */
   height: auto;
 }
-/* .listgroup{
-  overflow-y: auto;
-} */
 #Sports, #Culture, #Music, #Science, #History, #Computer{
   display: none;
   color: #874CCC;
   font-family: super pixel;
-  
 }
 .img{
   margin-left: 70px;

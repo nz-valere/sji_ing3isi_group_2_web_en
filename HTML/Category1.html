@@ -9,6 +9,7 @@
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="../CSS/Category1.css">
+    <link rel="stylesheet" href="../CSS/Questionform.css">
 </head>
 <body>
   <div class="parent  col-lg-4 col-md-6 col-sm-12">
@@ -56,7 +57,7 @@
           these 20 questions will challenge 
           your understanding of the games, rules 
           and legends that define the world of sports. <br>
-          <button class="btn">PLAY</button>
+          <button class="btn">Start</button>
         </div>
         <div id="Culture">
           Explore the rich tapestry of global cultures in this diverse and 
@@ -65,16 +66,17 @@
           Discover how different societies express their identities and 
           values, and see how well you know the cultural nuances that make our 
           world so wonderfully varied. <br>
-          <button class="btn">PLAY</button>
+          <button class="btn">Start</button>
         </div>
         <div id="Music">
+          <button class="btn">Start</button>
           Tune into the melodious world of music with this captivating category. 
           Covering genres from classical to rock, pop to jazz, these 20 questions 
           will test your knowledge of famous musicians, iconic albums, and 
           unforgettable songs. Whether you're a music aficionado or just love a 
           good tune, this category will challenge your understanding of the rhythms 
           and melodies that have shaped our auditory experiences. <br>
-          <button class="btn">PLAY</button>
+          <button class="btn">Start</button>
         </div>
         <div id="Science">
           Embark on a scientific adventure with this enlightening category. 
@@ -83,7 +85,7 @@
           Perfect for curious minds and science enthusiasts, this category will 
           challenge your understanding of the principles and discoveries that explain 
           how our world and universe work. <br>
-          <button class="btn">PLAY</button>
+          <button class="btn">Start</button>
         </div>
         <div id="History">
           Step back in time and explore the events that have shaped our world 
@@ -93,7 +95,7 @@
           Whether you're a history buff or just love a good story, 
           this category will test your knowledge of the past and how it has 
           influenced the present. <br>
-          <button class="btn">PLAY</button>
+          <button class="btn">Start</button>
         </div>
         <div id="Computer">
           Dive into the digital realm with this comprehensive category on computers. 
@@ -104,17 +106,50 @@
           enthusiasts and professionals alike, this category will 
           test your knowledge of the machines and innovations that 
           power our modern world. <br>
-          <button class="btn">PLAY</button>
+          <button class="btn">Start</button>
         </div>
       </div>
    </div>
   </div>
+
+  <div class="container1" style="display: none;">
+    <div class="question-mark">?</div>
+    <h1 class="isj">ISJ Quiz</h1>
+    <hr>
+    <div class="quiz">
+        <div class="timer">
+            <div class="progress">
+                <div class="progress-bar"></div>
+                <div class="progress-text">50</div>
+            </div>
+        </div>
+        <div class="number">
+            Question <span class="current">--</span><span>/</span><span class="total">--</span>
+        </div>
+        <h2 id="question">
+            <!-- Question here -->
+        </h2>
+        <div id="answers">
+            <!-- answers here -->
+        </div>
+        <button id="next" class="next-button">Next</button>
+            
+        
+    </div>
+    <div class="score">
+        <span class="score-text">Your score:</span>
+        <div>
+            <span class="final-points">0</span>
+            <span class="total-points">/30</span>
+        </div>
+        <button class="restart">Restart Quiz</button>
+    </div>
+</div>
   
-  
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
-    <script src="../Assets/jquery-3.7.1.min.js"></script>
-    <script src="../JS/category1.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+  integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+  </script>
+  <script src="../Assets/jquery-3.7.1.min.js"></script>
+  <script src="../JS/category1.js"></script>
 </body>
 </html>
