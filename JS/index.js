@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     const indexedDB = window.indexedDB ||
         window.mozIndexedDB ||
         window.webkitIndexedDB ||
@@ -22,7 +23,7 @@ $(document).ready(function() {
 
     function initializeDatabase() {
         console.log("Initializing database...");
-        const request = indexedDB.open("UserIdDB", 1);
+        const request = indexedDB.open("UserIdDB", 4);
 
         request.onerror = function(event) {
             console.log('An error occurred with IndexedDB');
@@ -32,9 +33,12 @@ $(document).ready(function() {
         request.onupgradeneeded = function(event) {
             db = event.target.result;
             if (!db.objectStoreNames.contains("Users")) {
-                const userIdDB = db.createObjectStore("Users", { keyPath: "user" });
-                userIdDB.createIndex("user", "user", { unique: true });
+                const userIdDB = db.createObjectStore("Users", { keyPath: "id", autoIncrement: true });
+                userIdDB.createIndex("username", "username", { unique: true });
                 userIdDB.createIndex("password", "password", { unique: false });
+                ['Sports', 'Culture', 'Music', 'Science', 'Computer'].forEach(category => {
+                    userIdDB.createIndex(category, category, { unique: false });
+                });
                 console.log("Object store 'Users' created");
             }
         };
@@ -57,14 +61,14 @@ $(document).ready(function() {
             const transaction = db.transaction(["Users"], "readwrite");
             const store = transaction.objectStore("Users");
 
-            const userIndex = store.index("user");
+            const userIndex = store.index("username");
             const userRequest = userIndex.get(username);
 
             userRequest.onsuccess = function() {
                 if (userRequest.result) {
                     console.log("Username already exists. Please choose a different one.");
                 } else {
-                    const addUserRequest = store.add({ user: username, password: password });
+                    const addUserRequest = store.add({ username: username, password: password });
                     addUserRequest.onsuccess = function() {
                         console.log("User added successfully!");
                         alert(`User ID '${username}' added to the database successfully!`);
@@ -109,6 +113,25 @@ $(document).ready(function() {
             };
         }
 
+        function addScore(score) {
+            console.log("Adding score for user:", score.username);
+            if (!db.objectStoreNames.contains("Users")) {
+                console.log("Object store 'Users' does not exist.");
+                return;
+            }
+
+            const transaction = db.transaction(["Users"], "readwrite");
+            const store = transaction.objectStore("Users");
+
+            const addScoreRequest = store.add(score);
+            addScoreRequest.onsuccess = function() {
+                console.log("Score added successfully!");
+            };
+            addScoreRequest.onerror = function(event) {
+                console.log("Error adding score.", event);
+            };
+        }
+
         $("#signup-form").submit(function(event) {
             event.preventDefault();
 
@@ -118,7 +141,6 @@ $(document).ready(function() {
 
             if (password !== confirmPassword) {
                 $("#error_message").text("Passwords do not match. Please try again.");
-                // alert("Passwords do not match. Please try again.");
                 return;
             }
 
@@ -135,7 +157,7 @@ $(document).ready(function() {
                 if (isValid) {
                     alert("Login successful!");
                     sessionStorage.setItem('username', username); // Temporarily store the username
-                    window.location.href = '../HTML/Home.html';                    // Redirect to home.html
+                    window.location.href = '../HTML/Home.html'; // Redirect to home.html
                 } else {
                     $("#error-message").text("Invalid username or password. Please try again.");
                 }
@@ -153,7 +175,7 @@ $(document).ready(function() {
         });
     }
 
-    // Delete the existing database and reinitialize
+    // Initialize the database when the document is ready
     initializeDatabase();
-    // deleteDatabase();
+    // deleteDatabase()
 });
