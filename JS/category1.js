@@ -97,7 +97,7 @@ const endQuiz = () => {
   scoreContainer.show();
   scoreTextElement.text(`You scored ${score} out of --`);
 };
-
+// hello
 const startQuiz = () => {
   $.getJSON('../HTML/questions.json', (data) => {
       questions = data.categories[0].questions;
