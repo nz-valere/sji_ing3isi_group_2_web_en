@@ -283,3 +283,17 @@ body {
         width: 100%;
     }
 }
+.carousel {
+  scroll-behavior: smooth;
+}
+
+.progress-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  background-color: #007bff;
+  width: 0;
+  transition: width 0.3s;
+}
+
