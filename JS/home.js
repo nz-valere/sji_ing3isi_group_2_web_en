@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let db;
 
     function initializeDatabase() {
-        const request = indexedDB.open("UserIdDB", 1);
+        const request = indexedDB.open("UserIdDB", 3);
 
         request.onerror = function(event) {
             console.log('An error occurred with IndexedDB');
@@ -71,4 +71,57 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     initializeDatabase();
+});
+
+function openDatabase() {
+    return new Promise((resolve, reject) => {
+        const request = indexedDB.open('UserIdDB', 3);
+  
+        request.onerror = (event) => {
+            console.error('An error occurred with IndexedDB', event);
+            reject('Error');
+        };
+  
+        request.onsuccess = (event) => {
+            db = event.target.result;
+            resolve(db);
+  
+        };
+  
+    });
+}
+
+    async function getCumulatedScore(username, category) {
+        const db = await openDatabase();
+        return await new Promise((resolve, reject) => {
+            const transaction = db.transaction(['Scores'], 'readonly');
+            const objectStore = transaction.objectStore('Scores');
+            const getRequest = objectStore.get(username);
+
+            getRequest.onsuccess = (event) => {
+                const userData = event.target.result;
+                alert(userData);
+                if (userData && userData[category]) {
+                    const scores = userData[category];
+                    alert(scores)
+                    const cumulatedScore = scores.reduce((total, scoreEntry) => total + scoreEntry.score, 0);
+                    resolve(cumulatedScore);
+                } else {
+                    resolve(0); // If no data found for user or category, return 0
+                }
+            };
+
+            getRequest.onerror = (event_1) => {
+                reject(event_1.target.error);
+            };
+        });
+    }
+
+const username = 'valere'
+const category = 'Music'
+
+getCumulatedScore(username, category).then((cumulatedScore) => {
+    console.log(`Cumulated score for ${username} in ${category}:`, cumulatedScore);
+}).catch((error) => {
+    console.error('Error retrieving cumulated score:', error);
 });

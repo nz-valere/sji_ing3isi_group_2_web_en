@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+body{
+    background-color: #9253dab0;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins';
+   
+    background-size: cover; /* Make sure the image covers the entire container */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+}
+.parent {
+   border: 1px solid #ccc;
+   width: 80vw;
+   height: 85vh;
+   margin: 40px auto; 
+   box-shadow: 2px 5px 10px #1111111f;
+   padding-inline: 40px;
+   border-radius: 10px;
+   background-color:rgba(255, 255, 255, 0.58) ;
+   overflow: hidden;
+ }
+
+
+ .van{
+   height: 40px;
+   border-radius: 0px 0px 20px 20px;
+   background-color: transparent;
+
+ }
+
+.Mainheader{
+    width: 50vw;
+    height: 40vh;
+    margin: 0;
+    margin: 10px auto; 
+  border-radius: 10px;
+
+ 
+}
+.Leaderboard{
+    width: 300px;
+    height: 73vh;
+    background-color:rgb(239, 160, 255);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    left: 70%;
+    top: -103%;
+    
+}
+.leaders{
+   display: flex;
+   height: 23vh;
+   justify-content: space-evenly;
+   align-items: end;
+   padding: 10px;
+}
+#one{
+   width: 25%;
+   height: 90%;
+   background-color: aqua;
+   border-radius: 10px;
+   border: 1px solid black;
+}
+#two, #third{
+   height: 70%;
+   width: 25%;
+   background-color: aquamarine;
+   border-radius: 10px;
+   border: 1px solid black;
+}
+.others{
+   overflow: hidden;
+   height: auto;
+   overflow: hidden;
+   /* overflow: scroll; */
+}
+.player{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   width: 90%;
+   height: 5vh;
+   border-radius: 10px;
+   border: 1px solid black;
+   margin:10px auto;
+   padding-inline: 10px;
+}
+.rank{
+   text-align: center;
+   margin-top: 5px;
+}
+.Welcome_note{
+    color: white;
+    position: relative;
+    top: -40%;
+    left: 2%;
+    text-decoration:solid;
+   font-weight: 1000;
+   width: 30%;
+   height: 10%;
+   font-size: x-large;
+}
+.home_play{
+    border-radius: 10px;
+    border: 1px solid rgb(177, 36, 206);
+    position: relative;
+    top: -40%;
+    left: 2%;
+    background-color: transparent;
+    color: white;
+    width: 10%;
+    height: 8%;
+    font-size: large;
+}
+.home_play:hover{
+    background-color:#ca1ee0;
+    
+}
+.home_play1{
+    border-radius: 10px;
+    border: 1px solid rgb(177, 36, 206);
+    position: relative;
+    top: -5%;
+    left: 2%;
+    background-color: transparent;
+    color: white;
+    width: 30%;
+    height: 70%;
+    border: none;
+}
+ 
+.catmessage{
+  position: relative;
+  top: -20%;
+ left: 15%;
+ font-weight: 1000;
+}
+.mini{
+  position: relative;
+  top: -20%;
+  left: 23%;
+}
+
+
+.wrapper{
+    display: flex;
+    max-width: 680px;
+    position: relative;
+    top: -15%;
+  }
+  .wrapper i{
+    top: 50%;
+    height: 44px;
+    width: 44px;
+    color: #343F4F;
+    cursor: pointer;
+    font-size: 1.15rem;
+    position: absolute;
+    text-align: center;
+    line-height: 44px;
+    background: #fff;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.1s linear;
+  }
+  .wrapper i:active{
+    transform: translateY(-50%) scale(0.9);
+  }
+  .wrapper i:hover{
+    background: #f2f2f2;
+  }
+  .wrapper i:first-child{
+    left: -30px;
+     display: none; 
+  }
+  .wrapper i:last-child{
+    right: -20px;
+    display: none; 
+  }
+  .wrapper .carousel{
+    font-size: 0px;
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+  }
+  .carousel.dragging{
+    cursor: grab;
+    scroll-behavior: auto;
+   
+  }
+  .carousel.dragging img{
+    pointer-events: none;
+    
+  }
+  .carousel img{
+    height: 100px;
+    object-fit: cover;
+    user-select: none;
+    margin-left: 14px;
+    width: calc(100% / 3);
+    border-radius: 10px;
+  }
+  .carousel img:first-child{
+    margin-left: 0px;
+  }
+  
+  @media screen and (max-width: 900px) {
+    .carousel img{
+      width: calc(100% / 2);
+    }
+  }
+  
+  @media screen and (max-width: 550px) {
+    .carousel img{
+      width: 100%;
+    }
+  }

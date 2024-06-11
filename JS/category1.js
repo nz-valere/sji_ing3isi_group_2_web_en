@@ -10,6 +10,9 @@ const scoreElement = $(".final-points");
 const scoreTextElement = $(".score-text");
 const scoreContainer = $(".score");
 const quizContainer = $(".quiz");
+const restart = $(".restart")
+const container =$('.container1')
+let currentCategory;
 
 let questions = [];
 let currentQuestionIndex = 0;
@@ -18,9 +21,88 @@ let score = 0;
 let timer;
 let conn;  // Connection object
 let isGameMaster = false; // Flag to determine who starts the quiz
-let currentCategory;
+// let currentCategory;
 
 
+function openDatabase() {
+  return new Promise((resolve, reject) => {
+      const request = indexedDB.open('UserIdDB', 4);
+
+      request.onerror = (event) => {
+          console.error('An error occurred with IndexedDB', event);
+          reject('Error');
+      };
+
+      request.onsuccess = (event) => {
+          db = event.target.result;
+          resolve(db);
+
+      };
+
+  });
+}
+
+function addScore(scoreData) {
+  alert('quiz end')
+  return openDatabase().then((db) => {
+      return new Promise((resolve, reject) => {
+          const transaction = db.transaction(['Users'], 'readwrite');
+          const objectStore = transaction.objectStore('Users');
+          const getRequest = objectStore.get(scoreData.username);
+
+          getRequest.onsuccess = (event) => {
+              const userData = event.target.result || { username: scoreData.username };
+              if (!userData[scoreData.category]) {
+                  userData[scoreData.category] = [];
+              }
+              userData[scoreData.category].push({ score: scoreData.score, date: scoreData.date });
+
+              const putRequest = objectStore.put(userData);
+              putRequest.onsuccess = () => {
+                  resolve();
+              };
+              putRequest.onerror = (event) => {
+                  reject(event.target.error);
+              };
+          };
+
+          getRequest.onerror = (event) => {
+              reject(event.target.error);
+          };
+      });
+  });
+}
+
+
+
+  const endQuiz = () => {
+    clearInterval(timer);
+    quizContainer.hide();
+    scoreContainer.show();
+    scoreTextElement.text(`You scored ${score} out of --`);
+    // alert('hello')
+    const username = sessionStorage.getItem('username');
+    const category = currentCategory; // assuming currentCategory is set when category is chosen
+  
+    if (username) {
+        const scoreData = {
+            username: username,
+            category: category,
+            score: score,
+            date: new Date().toISOString()
+        };
+        alert(category);
+        addScore(scoreData).then(() => {
+            console.log('Score saved successfully');
+        }).catch((error) => {
+            console.error('Error saving score:', error);
+        });
+    } else {
+        alert('No username found. Please log in.');
+        window.location.href = '../HTML/index.html'; // Redirect to login page if no username is found
+    }
+  };
+  
 const loadCategory = function(category){
   for (const iterator of category){
     ul.append(`<div class = 'small-container ${iterator.name}'>${iterator.name}</div>`)
@@ -94,18 +176,11 @@ const changeBackgroundColor = () => {
   $("body").css("background-color", randomColor);
 };
 
-// Function to end the quiz and show the score
-const endQuiz = () => {
-  clearInterval(timer);
-  quizContainer.hide();
-  scoreContainer.show();
-  scoreTextElement.text(`You scored ${score} out of --`);
-};
 
 
 const startQuiz = () => {
   $.getJSON('../HTML/questions.json', (data) => {
-      questions = data.categories[0].questions;
+      questions = data.categories[4].questions;
   }).fail(() => {
       console.log('Error');
   }).then(() => {
@@ -192,9 +267,15 @@ $(document).ready(function(){
       scoreContainer.hide();
       startQuiz();
     })
-
+    $('.restart').on('click', function(){
+      $('.container1').css('display', 'none')
+      $('.container1').slideToggle().animate()
+      // scoreContainer.hide();
+      startQuiz();
+    })
   })
   
 })
+
 
 

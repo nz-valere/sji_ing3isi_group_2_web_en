@@ -10,52 +10,207 @@
         },
         {
           "question": "Which athlete has won the most Olympic gold medals?",
-          "choices": [
-            "Michael Phelps",
-            "Usain Bolt",
-            "Larisa Latynina",
-            "Carl Lewis"
-          ],
+          "choices": ["Michael Phelps", "Usain Bolt", "Larisa Latynina", "Carl Lewis"],
           "correct_answer": "Michael Phelps"
         },
         {
           "question": "Which sport uses the term 'Love' to represent zero points?",
           "choices": ["Tennis", "Golf", "Cricket", "Badminton"],
           "correct_answer": "Tennis"
+        },
+        {
+          "question": "What is the national sport of Canada?",
+          "choices": ["Ice Hockey", "Lacrosse", "Basketball", "Soccer"],
+          "correct_answer": "Lacrosse"
+        },
+        {
+          "question": "Which country hosted the 2016 Summer Olympics?",
+          "choices": ["Brazil", "China", "UK", "Russia"],
+          "correct_answer": "Brazil"
+        },
+        {
+          "question": "Who is the NBA's all-time leading scorer?",
+          "choices": ["Kareem Abdul-Jabbar", "LeBron James", "Michael Jordan", "Kobe Bryant"],
+          "correct_answer": "Kareem Abdul-Jabbar"
+        },
+        {
+          "question": "Which country won the first FIFA World Cup?",
+          "choices": ["Uruguay", "Brazil", "Germany", "Italy"],
+          "correct_answer": "Uruguay"
+        },
+        {
+          "question": "In which sport would you perform a slam dunk?",
+          "choices": ["Basketball", "Volleyball", "Tennis", "Football"],
+          "correct_answer": "Basketball"
+        },
+        {
+          "question": "Which golfer is known as 'The Golden Bear'?",
+          "choices": ["Jack Nicklaus", "Tiger Woods", "Arnold Palmer", "Gary Player"],
+          "correct_answer": "Jack Nicklaus"
+        },
+        {
+          "question": "What is the highest possible break in snooker?",
+          "choices": ["147", "155", "150", "200"],
+          "correct_answer": "147"
+        },
+        {
+          "question": "Which tennis player has won the most Grand Slam titles?",
+          "choices": ["Roger Federer", "Rafael Nadal", "Serena Williams", "Margaret Court"],
+          "correct_answer": "Margaret Court"
+        },
+        {
+          "question": "What does NBA stand for?",
+          "choices": ["National Basketball Association", "National Baseball Association", "National Boxing Association", "National Badminton Association"],
+          "correct_answer": "National Basketball Association"
+        },
+        {
+          "question": "Which country is known for dominating the sport of Rugby?",
+          "choices": ["New Zealand", "Australia", "South Africa", "England"],
+          "correct_answer": "New Zealand"
+        },
+        {
+          "question": "Which country won the first Cricket World Cup in 1975?",
+          "choices": ["West Indies", "Australia", "India", "England"],
+          "correct_answer": "West Indies"
+        },
+        {
+          "question": "Which Formula 1 driver has the most World Championships?",
+          "choices": ["Michael Schumacher", "Lewis Hamilton", "Ayrton Senna", "Sebastian Vettel"],
+          "correct_answer": "Michael Schumacher"
+        },
+        {
+          "question": "In which sport is the term 'home run' used?",
+          "choices": ["Baseball", "Cricket", "Football", "Tennis"],
+          "correct_answer": "Baseball"
+        },
+        {
+          "question": "What is the length of an Olympic swimming pool?",
+          "choices": ["50 meters", "25 meters", "100 meters", "75 meters"],
+          "correct_answer": "50 meters"
+        },
+        {
+          "question": "Which country is the birthplace of the Olympic Games?",
+          "choices": ["Greece", "Italy", "France", "USA"],
+          "correct_answer": "Greece"
+        },
+        {
+          "question": "Which boxer was known as 'The Greatest'?",
+          "choices": ["Muhammad Ali", "Mike Tyson", "Floyd Mayweather", "Joe Frazier"],
+          "correct_answer": "Muhammad Ali"
+        },
+        {
+          "question": "In which sport would you find a 'puck'?",
+          "choices": ["Ice Hockey", "Field Hockey", "Lacrosse", "Curling"],
+          "correct_answer": "Ice Hockey"
         }
       ],
       "description": "Sports description here"
     },
     {
       "name": "Culture",
-      "questions": [
-        {
-          "question": "Who painted the Mona Lisa?",
-          "choices": [
-            "Leonardo da Vinci",
-            "Pablo Picasso",
-            "Vincent van Gogh",
-            "Michelangelo"
-          ],
-          "correct_answer": "Leonardo da Vinci"
-        },
-        {
-          "question": "Which country is famous for Bollywood?",
-          "choices": ["India", "China", "USA", "France"],
-          "correct_answer": "India"
-        },
-        {
-          "question": "Which novel is authored by George Orwell?",
-          "choices": [
-            "1984",
-            "Brave New World",
-            "Fahrenheit 451",
-            "Animal Farm"
-          ],
-          "correct_answer": "1984"
-        }
-      ],
-      "description": "Culture description here"
+        "questions": [
+          {
+            "question": "Who painted the Mona Lisa?",
+            "choices": ["Leonardo da Vinci", "Pablo Picasso", "Vincent van Gogh", "Michelangelo"],
+            "correct_answer": "Leonardo da Vinci"
+          },
+          {
+            "question": "Which country is famous for Bollywood?",
+            "choices": ["India", "China", "USA", "France"],
+            "correct_answer": "India"
+          },
+          {
+            "question": "Which novel is authored by George Orwell?",
+            "choices": ["1984", "Brave New World", "Fahrenheit 451", "Animal Farm"],
+            "correct_answer": "1984"
+          },
+          {
+            "question": "Who wrote 'Pride and Prejudice'?",
+            "choices": ["Jane Austen", "Emily Bronte", "Charles Dickens", "George Eliot"],
+            "correct_answer": "Jane Austen"
+          },
+          {
+            "question": "What is the traditional clothing of Japan called?",
+            "choices": ["Kimono", "Sari", "Hanbok", "Cheongsam"],
+            "correct_answer": "Kimono"
+          },
+          {
+            "question": "Which ancient city is famous for its Hanging Gardens?",
+            "choices": ["Babylon", "Rome", "Athens", "Carthage"],
+            "correct_answer": "Babylon"
+          },
+          {
+            "question": "Who composed the Four Seasons?",
+            "choices": ["Antonio Vivaldi", "Johann Sebastian Bach", "Ludwig van Beethoven", "Wolfgang Amadeus Mozart"],
+            "correct_answer": "Antonio Vivaldi"
+          },
+          {
+            "question": "Which country is known for its Maple Syrup?",
+            "choices": ["Canada", "USA", "Germany", "Australia"],
+            "correct_answer": "Canada"
+          },
+          {
+            "question": "What is the national language of Brazil?",
+            "choices": ["Portuguese", "Spanish", "French", "English"],
+            "correct_answer": "Portuguese"
+          },
+          {
+            "question": "Who sculpted 'David'?",
+            "choices": ["Michelangelo", "Donatello", "Leonardo da Vinci", "Raphael"],
+            "correct_answer": "Michelangelo"
+          },
+          {
+            "question": "Which famous playwright wrote 'Hamlet'?",
+            "choices": ["William Shakespeare", "Christopher Marlowe", "Ben Jonson", "Thomas Middleton"],
+            "correct_answer": "William Shakespeare"
+          },
+          {
+            "question": "Which country is known for its Flamenco dance?",
+            "choices": ["Spain", "Portugal", "Italy", "Greece"],
+            "correct_answer": "Spain"
+          },
+          {
+            "question": "What is the main ingredient in traditional Japanese miso soup?",
+            "choices": ["Soybean paste", "Rice", "Seaweed", "Tofu"],
+            "correct_answer": "Soybean paste"
+          },
+          {
+            "question": "Who wrote 'The Catcher in the Rye'?",
+            "choices": ["J.D. Salinger", "F. Scott Fitzgerald", "Ernest Hemingway", "Mark Twain"],
+            "correct_answer": "J.D. Salinger"
+          },
+          {
+            "question": "Which country's national anthem is 'La Marseillaise'?",
+            "choices": ["France", "Italy", "Germany", "Spain"],
+            "correct_answer": "France"
+          },
+          {
+            "question": "Which artist is known for the painting 'Starry Night'?",
+            "choices": ["Vincent van Gogh", "Claude Monet", "Pablo Picasso", "Salvador Dali"],
+            "correct_answer": "Vincent van Gogh"
+          },
+          {
+            "question": "What is the primary material used in traditional Chinese calligraphy?",
+            "choices": ["Ink", "Charcoal", "Pencil", "Crayon"],
+            "correct_answer": "Ink"
+          },
+          {
+            "question": "Which festival is known as the Festival of Lights?",
+            "choices": ["Diwali", "Eid", "Christmas", "Hanukkah"],
+            "correct_answer": "Diwali"
+          },
+          {
+            "question": "Who wrote the epic poem 'The Odyssey'?",
+            "choices": ["Homer", "Virgil", "Sophocles", "Euripides"],
+            "correct_answer": "Homer"
+          },
+          {
+            "question": "What is the traditional headwear of Scottish men called?",
+            "choices": ["Tam o' Shanter", "Bowler hat", "Beret", "Fedora"],
+            "correct_answer": "Tam o' Shanter"
+          }
+        ],
+        "description" : "Culture description here"
     },
     {
       "name": "Music",
