@@ -16,6 +16,10 @@ let currentQuestionIndex = 0;
 let time = 10;
 let score = 0;
 let timer;
+let conn;  // Connection object
+let isGameMaster = false; // Flag to determine who starts the quiz
+let currentCategory;
+
 
 const loadCategory = function(category){
   for (const iterator of category){
@@ -97,7 +101,8 @@ const endQuiz = () => {
   scoreContainer.show();
   scoreTextElement.text(`You scored ${score} out of --`);
 };
-// hello
+
+
 const startQuiz = () => {
   $.getJSON('../HTML/questions.json', (data) => {
       questions = data.categories[0].questions;
@@ -108,13 +113,65 @@ const startQuiz = () => {
   });
 };
 
+function addPlayerToList(id) {
+  const listItem = $("<li></li>").text(id);
+  listItem.click(function() {
+    connectToPeer(id);
+  });
+  $('#players').append(listItem);
+}
+  // Manually add a player to the list
+  $('#add-player-btn').click(function() {
+    const newPlayerId = $('#new-player-id').val();
+    if (newPlayerId && newPlayerId !== peer.id) {
+      addPlayerToList(newPlayerId);
+    } else {
+      alert('Invalid ID or you cannot add your own ID.');
+    }
+  });
+  
+  // Connect to another peer
+  function connectToPeer(peerId) {
+  if (peerId === peer.id) {
+    alert("You cannot connect to yourself. Use another device or browser to test.");
+    return;
+  }
+
+  conn = peer.connect(peerId);
+  setupConnection(conn);
+  conn.on('open', function() {
+    console.log('Connected to: ' + peerId);
+    startQuiz();
+  });
+}
+
+
 $(document).ready(function(){
+  const peer = new Peer();
+
+  peer.on('open', function(id) {
+    console.log('My peer ID is: ' + id);
+    $('#id').text(id);
+  });
+
   $.getJSON('../HTML/questions.json', function(data){
     let category = data.categories
     console.log(category);
     loadCategory(category)
     $('.small-container').on('click', function(){
       var click = $(this).text();
+
+      peer.on('connection', function(connection) {
+        conn = connection;  // Store the connection object
+        setupConnection(conn);
+        conn.on('open', function() {
+          console.log('Connected to: ' + conn.peer);
+          if (isGameMaster) {
+            startQuiz();
+          }
+        });
+      });
+
       console.log(click);
       $('h4').css('display', 'none')
       $('#Sports').hide();

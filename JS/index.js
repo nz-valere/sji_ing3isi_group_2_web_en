@@ -154,6 +154,7 @@ $(document).ready(function() {
     }
 
     // Delete the existing database and reinitialize
-    initializeDatabase();
     // deleteDatabase();
+    initializeDatabase();
+    
 });

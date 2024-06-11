@@ -1,42 +1,344 @@
-const indexedDB = 
-    window.indexedDB ||
-    mozIndexedDb ||
-    webkitIdexedDB ||
-    msIndexedDB;
- 
-const request = indexedDB.open("UserIdDB", 1);
+$(document).ready(function() {
+    // Initialize Peer
+    const peer = new Peer();
+    
+    const questionsElement = $("#question");
+    const answersElement = $("#answers");
+    const questionNumberElement = $(".current");
+    const totalQuestionsElement = $(".total");
+    const progressBar = $(".progress-bar");
+    const progressText = $(".progress-text");
+    const scoreElement = $(".final-points");
+    const scoreTextElement = $(".score-text");
+    const scoreContainer = $(".score");
+    const quizContainer = $(".quiz");
+    
+    let conn;  // Connection object
+    let isGameMaster = false; // Flag to determine who starts the quiz
+    let currentCategory;
+    
+    let questions = [];
+    let currentQuestionIndex = 0;
+    let time = 10;
+    let score = 0;
+    let timer;
+    
+    peer.on('open', function(id) {
+      console.log('My peer ID is: ' + id);
+      $('#id').text(id);
+    });
+    
+    peer.on('connection', function(connection) {
+      conn = connection;  // Store the connection object
+      setupConnection(conn);
+      conn.on('open', function() {
+        console.log('Connected to: ' + conn.peer);
+        if (!isGameMaster) {
+          startQuiz();
+        }
+      });
+    });
+    
+    // Add player ID to the list of available players
+    function addPlayerToList(id) {
+      const listItem = $("<li></li>").text(id);
+      listItem.click(function() {
+        connectToPeer(id);
+      });
+      $('#players').append(listItem);
+    }
+    
+    // Manually add a player to the list
+    $('#add-player-btn').click(function() {
+      const newPlayerId = $('#new-player-id').val();
+      if (newPlayerId && newPlayerId !== peer.id) {
+        addPlayerToList(newPlayerId);
+      } else {
+        alert('Invalid ID or you cannot add your own ID.');
+      }
+    });
+    
+    // Connect to another peer
+    function connectToPeer(peerId) {
+      if (peerId === peer.id) {
+        alert("You cannot connect to yourself. Use another device or browser to test.");
+        return;
+      }
+    
+      conn = peer.connect(peerId);
+      setupConnection(conn);
+      conn.on('open', function() {
+        console.log('Connected to: ' + peerId);
+        $('.parent').css('display', 'none');
+        $('.container1').slideToggle().animate();
+        scoreContainer.hide();
+        isGameMaster = true;  // The player who initiates the connection is the game master
+        startQuiz();
+      });
+    }
+    
+    // Setup connection to handle data
+    function setupConnection(connection) {
+      connection.on('data', function(data) {
+        // Handle incoming data
+        if (data.type === 'question') {
+          displayQuestion(data.question);
+        } else if (data.type === 'answer') {
+          handleAnswer(data.answer, data.peerId);
+        } else if (data.type === 'score') {
+          alert(`Player ${data.peerId} scored!`);
+          nextQuestion();
+        }
+      });
+    }
+    
+    // Function to start the quiz
+    function startQuiz() {
+      $.getJSON('../HTML/questions.json', (data) => {
+        questions = data.categories[0].questions;
+        console.log('Questions loaded:', questions);
+        if (isGameMaster) {
+          sendQuestion();
+          console.log('valereM');
+        } else {
+            $('.parent').css('display', 'none');
+            $('.container1').slideToggle().animate();
+            scoreContainer.hide();
+          loadQuestion();
 
-request.onerror = function(event){
-    console.log('An error occured with idexedDB');
-    console.log(event);
-};
-request.onupgradeneeded = function (){
-const db = request.result;
-const UserIdDB = db.createObjectStore("Users",{keyath : "id"});
-UserIdDB.createIndex("User", [user], {unique: true});
-UserIdDB.createIndex("password", [password], {unique: false});
-};
-
-request.onsuccess = function(event){
-    const db = request.result;
-    const transaction = db.transaction("Users", "readwrite");
-    const store = transaction.objectStore("Users");
-    const userIndex = store.index(User);
-    const passIndex = store.index(password);
-
-    store.put({id: 1,user:"val" ,password: "12345"});
-
-    const idQuerry = store.get(1);
-    const userQuerry = userIndex.get("val");
-
-    idQuerry.onsuccess = function () {
-        console.log("idQuerry", idQuerry.result);
-    };
-    userQuerry.onsuccess = function () {
-        console.log("userQuerry", userQuerry.result);
-    };
-
-    transaction.oncomplete = function (){
-        db.close();
-    };
-};
+        }
+      }).fail(() => {
+        console.log('Error loading questions.json');
+      });
+    }
+    
+// Function to send the current question to the peer
+function sendQuestion() {
+    if (currentQuestionIndex < questions.length) {
+      const question = questions[currentQuestionIndex];
+      conn.send({ type: 'question', question: question });
+      displayQuestion(question);
+    } else {
+      alert('Quiz finished!');
+      endQuiz();
+    }
+  }
+  
+  // Function to load the next question
+  function loadQuestion() {
+    if (currentQuestionIndex < questions.length) {
+      const currentQuestion = questions[currentQuestionIndex];
+      displayQuestion(currentQuestion);
+      resetTimer();
+    } else {
+      endQuiz();
+    }
+  }
+  
+  // Function to display the current question
+  function displayQuestion(question) {
+    questionsElement.text(question.question);
+    answersElement.empty();
+  
+    question.choices.forEach((choice) => {
+      const answerButton = $(`<button class="answer">${choice}</button>`);
+      answerButton.on("click", () => {
+        checkAnswer(choice, question.correct_answer);
+        // Disable all buttons after answering
+        answersElement.find('button').attr('disabled', true);
+      });
+      answersElement.append(answerButton);
+    });
+  
+    questionNumberElement.text(currentQuestionIndex + 1);
+    totalQuestionsElement.text(questions.length);
+  }
+  
+  // Function to check the selected answer
+  function checkAnswer(selectedAnswer, correctAnswer) {
+    if (selectedAnswer === correctAnswer) {
+      score += 3;
+      scoreElement.text(score);
+      scoreTextElement.text(`Your score: ${score}`);
+    }
+    conn.send({ type: 'answer', answer: selectedAnswer, peerId: peer.id });
+  }
+  
+  // Function to handle the answer
+  function handleAnswer(answer, peerId) {
+    const currentQuestion = questions[currentQuestionIndex];
+    const isCorrect = answer === currentQuestion.correct_answer;
+    if (isCorrect) {
+      if (peerId === peer.id) {
+        score += 3;
+        scoreElement.text(score);
+        scoreTextElement.text(`Your score: ${score}`);
+      }
+      conn.send({ type: 'score', peerId: peerId });
+      currentQuestionIndex++;
+      nextQuestion();
+    } else {
+      alert('Incorrect answer.');
+      nextQuestion(); // Proceed to the next question even if the answer is incorrect
+    }
+  }
+  
+  // Function to load the next question
+  function nextQuestion() {
+    if (currentQuestionIndex < questions.length) {
+      if (isGameMaster) {
+        sendQuestion();
+      } else {
+        loadQuestion();
+      }
+    } else {
+      endQuiz();
+    }
+  }
+  
+  // Function to reset the timer for each question
+  function resetTimer() {
+    clearInterval(timer);
+    time = 10;
+    updateProgress(time);
+  
+    timer = setInterval(() => {
+      time--;
+      updateProgress(time);
+      if (time <= 0) {
+        clearInterval(timer);
+        currentQuestionIndex++;
+        if (isGameMaster) {
+          sendQuestion();
+        } else {
+          loadQuestion();
+        }
+      }
+    }, 1000);
+  }
+  
+  // Function to update the progress bar
+  function updateProgress(value) {
+    progressText.text(`${value}`);
+    const percentage = (value / time) * 100;
+    progressBar.css("width", `${percentage}%`);
+  }
+  
+// Function to end the quiz
+function endQuiz() {
+    clearInterval(timer);
+    quizContainer.hide();
+    scoreContainer.show();
+    scoreTextElement.text(`You scored ${score} out of ${questions.length * 3}`);
+    const username = sessionStorage.getItem('username');
+    const category = currentCategory;
+  
+    if (username) {
+      const scoreData = {
+        username: username,
+        category: category,
+        score: score,
+        date: new Date().toISOString()
+      };
+      addScore(scoreData).then(() => {
+        console.log('Score saved successfully');
+      }).catch((error) => {
+        console.error('Error saving score:', error);
+      });
+    } else {
+      alert('No username found. Please log in.');
+      window.location.href = '../HTML/index.html'; // Redirect to login page if no username is found
+    }
+  }
+  
+  // Function to change the background color with animation
+  function changeBackgroundColor() {
+    $("body").css("transition", "background-color 0.5s");
+    const colors = ["#f8b195", "#f67280", "#c06c84", "#6c5b7b", "#355c7d"];
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    $("body").css("background-color", randomColor);
+  }
+  
+  // Function to load the quiz categories
+  function loadCategory(categories) {
+    const ul = $("<div class='list-group'></div>");
+    categories.forEach(category => {
+      ul.append(`<div class='small-container ${category.name}'>${category.name}</div>`);
+    });
+    $('.child-container').append(ul);
+  }
+  
+  // Event handlers for category selection and quiz start
+  $.getJSON('../HTML/questions.json', function(data) {
+    let categories = data.categories;
+    loadCategory(categories);
+  
+    $('.small-container').on('click', function() {
+      var click = $(this).text();
+      currentCategory = click;
+      $('h4').css('display', 'none');
+      $('.category-section').hide();
+      $('h4').html(`You chose: <strong>${click}</strong>`).slideToggle();
+      $('body').css('backgroundImage', `url(../Assets/images/${click}.png)`);
+      $(`#${click}`).slideToggle().animate({ fontSize: '15px' });
+      $('.img img').attr('src', `../Assets/images/${click}.png`);
+    });
+  
+    $('.btn').on('click', function() {
+      $('.parent').css('display', 'none');
+      $('.container1').slideToggle().animate();
+      scoreContainer.hide();
+      startQuiz();
+    });
+  
+    $('.restart').on('click', function() {
+      $('.container1').css('display', 'none');
+      $('.container1').slideToggle().animate();
+      scoreContainer.hide();
+      currentQuestionIndex = 0; // Reset the question index for the new quiz
+      score = 0; // Reset the score for the new quiz
+      startQuiz();
+    });
+  });
+  
+  // Function to add a score to IndexedDB
+  function addScore(scoreData) {
+    // Implementation for saving score to IndexedDB or other storage
+    return new Promise((resolve, reject) => {
+      // Example IndexedDB code
+      const request = indexedDB.open('QuizScoresDB', 1);
+  
+      request.onupgradeneeded = function(event) {
+        const db = event.target.result;
+        const objectStore = db.createObjectStore('scores', { keyPath: 'id', autoIncrement: true });
+        objectStore.createIndex('username', 'username', { unique: false });
+        objectStore.createIndex('category', 'category', { unique: false });
+        objectStore.createIndex('score', 'score', { unique: false });
+        objectStore.createIndex('date', 'date', { unique: false });
+      };
+  
+      request.onsuccess = function(event) {
+        const db = event.target.result;
+        const transaction = db.transaction(['scores'], 'readwrite');
+        const objectStore = transaction.objectStore('scores');
+        const addRequest = objectStore.add(scoreData);
+  
+        addRequest.onsuccess = function(event) {
+          console.log('Score saved successfully');
+          resolve();
+        };
+  
+        addRequest.onerror = function(event) {
+          console.error('Error saving score:', event.target.error);
+          reject(event.target.error);
+        };
+      };
+  
+      request.onerror = function(event) {
+        console.error('Database error:', event.target.error);
+        reject(event.target.error);
+      };
+    });
+  }
+})
+  

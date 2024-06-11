@@ -79,13 +79,19 @@ body{
 #Sports, #Culture, #Music, #Science, #History, #Computer{
   display: none;
   color: #874CCC;
-  font-family: super pixel;
+  /* font-family: super pixel; */
+  display: flex;
+  /* justify-content: space-between; */
+  width: 100%;
 }
 .img{
   margin-left: 70px;
-  width: 30vw;
+  width: 50vw;
   height: fit-content;
 }
 .img img{
   width: 30%;
+}
+h5{
+  color: black;
 }
