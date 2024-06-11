@@ -13,10 +13,11 @@ body {
 .parent {
     border: 1px solid #ccc;
     width: 80vw;
-    height: 85vh;
+    max-width: 1200px;
+    height: auto;
     margin: 40px auto;
     box-shadow: 2px 5px 10px #1111111f;
-    padding-inline: 40px;
+    padding: 20px;
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.58);
     overflow: hidden;
@@ -29,7 +30,7 @@ body {
 }
 
 .van {
-    height: 40px;
+    height: 50px;
     border-radius: 0px 0px 20px 20px;
     background-color: transparent;
     animation: slideInDown 1s ease-in-out;
@@ -41,8 +42,9 @@ body {
 }
 
 .Mainheader {
-    width: 50vw;
-    height: 40vh;
+    width: 100%;
+    height: auto;
+    max-height: 300px;
     margin: 10px auto;
     border-radius: 10px;
     animation: zoomIn 1.5s ease-in-out;
@@ -54,16 +56,15 @@ body {
 }
 
 .Leaderboard {
-    width: 300px;
-    height: 73vh;
+    width: 100%;
+    max-width: 300px;
+    height: auto;
     background-color: rgb(239, 160, 255);
     display: flex;
     flex-direction: column;
     padding: 20px;
     border-radius: 10px;
-    position: relative;
-    left: 70%;
-    top: -103%;
+    margin: 20px auto;
     animation: slideInRight 1.5s ease-in-out;
 }
 
@@ -74,7 +75,6 @@ body {
 
 .leaders {
     display: flex;
-    height: 23vh;
     justify-content: space-evenly;
     align-items: end;
     padding: 10px;
@@ -88,21 +88,20 @@ body {
     transition: transform 0.3s ease;
 }
 
+#one {
+    height: 100px;
+}
+
+#two, #third {
+    height: 70px;
+}
+
 #one:hover, #two:hover, #third:hover {
     transform: scale(1.1);
 }
 
-#one {
-    height: 90%;
-}
-
-#two, #third {
-    height: 70%;
-}
-
 .others {
     overflow: hidden;
-    height: auto;
 }
 
 .player {
@@ -110,7 +109,7 @@ body {
     justify-content: space-between;
     align-items: center;
     width: 90%;
-    height: 5vh;
+    height: 50px;
     border-radius: 10px;
     border: 1px solid black;
     margin: 10px auto;
@@ -124,19 +123,18 @@ body {
 
 .rank {
     text-align: center;
-    margin-top: 5px;
 }
 
 .Welcome_note {
     color: white;
     position: relative;
-    top: -40%;
+    top: -20px;
     left: 2%;
     text-decoration: solid;
     font-weight: 1000;
-    width: 30%;
-    height: 10%;
-    font-size: x-large;
+    width: 100%;
+    text-align: center;
+    font-size: 1.5rem;
     animation: fadeInLeft 1s ease-in-out;
 }
 
@@ -149,14 +147,16 @@ body {
     border-radius: 10px;
     border: 1px solid rgb(177, 36, 206);
     position: relative;
-    top: -40%;
-    left: 2%;
     background-color: transparent;
     color: white;
-    width: 10%;
-    height: 8%;
+    width: 100px;
+    height: 40px;
     font-size: large;
+    margin: 10px auto;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .home_play:hover {
@@ -166,10 +166,7 @@ body {
 
 .home_play1 {
     border-radius: 10px;
-    border: 1px solid rgb(177, 36, 206);
     position: relative;
-    top: -5%;
-    left: 2%;
     background-color: transparent;
     color: white;
     width: 30%;
@@ -178,9 +175,7 @@ body {
 }
 
 .catmessage {
-    position: relative;
-    top: -20%;
-    left: 15%;
+    text-align: center;
     font-weight: 1000;
     animation: fadeInUp 1s ease-in-out;
 }
@@ -191,16 +186,13 @@ body {
 }
 
 .mini {
-    position: relative;
-    top: -20%;
-    left: 23%;
+    text-align: center;
 }
 
 .wrapper {
     display: flex;
     max-width: 680px;
-    position: relative;
-    top: -15%;
+    margin: 20px auto;
 }
 
 .wrapper i {
@@ -276,10 +268,35 @@ body {
     .carousel img {
         width: calc(100% / 2);
     }
+
+    .Welcome_note {
+        font-size: 1.25rem;
+    }
+
+    .home_play {
+        width: 80px;
+        height: 35px;
+        font-size: medium;
+    }
 }
 
 @media screen and (max-width: 550px) {
     .carousel img {
         width: 100%;
+    }
+
+    .parent {
+        width: 95vw;
+        padding: 10px;
+    }
+
+    .wrapper {
+        max-width: 100%;
+    }
+
+    .home_play {
+        width: 70px;
+        height: 30px;
+        font-size: small;
     }
 }
