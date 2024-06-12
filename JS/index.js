@@ -23,7 +23,7 @@ $(document).ready(function() {
 
     function initializeDatabase() {
         console.log("Initializing database...");
-        const request = indexedDB.open("UserIdDB", 4);
+        const request = indexedDB.open("UserIdDB", 3);
 
         request.onerror = function(event) {
             console.log('An error occurred with IndexedDB');
@@ -33,13 +33,16 @@ $(document).ready(function() {
         request.onupgradeneeded = function(event) {
             db = event.target.result;
             if (!db.objectStoreNames.contains("Users")) {
-                const userIdDB = db.createObjectStore("Users", { keyPath: "id", autoIncrement: true });
-                userIdDB.createIndex("username", "username", { unique: true });
+                const userIdDB = db.createObjectStore("Users", { keyPath: "username" });
                 userIdDB.createIndex("password", "password", { unique: false });
-                ['Sports', 'Culture', 'Music', 'Science', 'Computer'].forEach(category => {
-                    userIdDB.createIndex(category, category, { unique: false });
-                });
                 console.log("Object store 'Users' created");
+            }
+            if (!db.objectStoreNames.contains("Scores")) {
+                const scorestore = db.createObjectStore("Scores", { keyPath: "id", autoIncrement: true });
+                scorestore.createIndex("username", "username", { unique: false });
+                scorestore.createIndex('category', 'category', { unique: false });
+                scorestore.createIndex('score', 'score', { unique: false });
+                console.log("Object store 'Scores' created");
             }
         };
 
@@ -61,8 +64,7 @@ $(document).ready(function() {
             const transaction = db.transaction(["Users"], "readwrite");
             const store = transaction.objectStore("Users");
 
-            const userIndex = store.index("username");
-            const userRequest = userIndex.get(username);
+            const userRequest = store.get(username);
 
             userRequest.onsuccess = function() {
                 if (userRequest.result) {
@@ -113,25 +115,6 @@ $(document).ready(function() {
             };
         }
 
-        function addScore(score) {
-            console.log("Adding score for user:", score.username);
-            if (!db.objectStoreNames.contains("Users")) {
-                console.log("Object store 'Users' does not exist.");
-                return;
-            }
-
-            const transaction = db.transaction(["Users"], "readwrite");
-            const store = transaction.objectStore("Users");
-
-            const addScoreRequest = store.add(score);
-            addScoreRequest.onsuccess = function() {
-                console.log("Score added successfully!");
-            };
-            addScoreRequest.onerror = function(event) {
-                console.log("Error adding score.", event);
-            };
-        }
-
         $("#signup-form").submit(function(event) {
             event.preventDefault();
 
@@ -175,8 +158,6 @@ $(document).ready(function() {
         });
     }
 
-    // Delete the existing database and reinitialize
-    // deleteDatabase();
     initializeDatabase();
-    
+    // deleteDatabase();
 });

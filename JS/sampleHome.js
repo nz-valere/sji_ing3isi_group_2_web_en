@@ -22,6 +22,7 @@ arrowIcons.forEach(icon => {
         let firstImgWidth = firstImg.clientWidth + 14;
         carousel.scrollLeft += icon.id == "left" ? -firstImgWidth : firstImgWidth;
         setTimeout(() => showHideIcons(), 60);
+        updateProgressIndicator();
     });
 });
 

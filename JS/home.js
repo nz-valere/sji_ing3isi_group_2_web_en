@@ -91,37 +91,63 @@ function openDatabase() {
     });
 }
 
-    async function getCumulatedScore(username, category) {
-        const db = await openDatabase();
-        return await new Promise((resolve, reject) => {
-            const transaction = db.transaction(['Scores'], 'readonly');
-            const objectStore = transaction.objectStore('Scores');
-            const getRequest = objectStore.get(username);
+function getCumulativeScore(username) {
+    return new Promise((resolve, reject) => {
+        const request = indexedDB.open("YourDatabaseName", 1);
 
-            getRequest.onsuccess = (event) => {
-                const userData = event.target.result;
-                alert(userData);
-                if (userData && userData[category]) {
-                    const scores = userData[category];
-                    alert(scores)
-                    const cumulatedScore = scores.reduce((total, scoreEntry) => total + scoreEntry.score, 0);
-                    resolve(cumulatedScore);
+        request.onerror = function(event) {
+            console.error("Database error: ", event.target.errorCode);
+            reject("Database error: " + event.target.errorCode);
+        };
+
+        request.onsuccess = function(event) {
+            const db = event.target.result;
+            const transaction = db.transaction(["Scores"], "readonly");
+            const scoreStore = transaction.objectStore("Scores");
+
+            const index = scoreStore.index("username");
+            let cumulativeScore = 0;
+
+            index.openCursor(IDBKeyRange.only(username)).onsuccess = function(event) {
+                const cursor = event.target.result;
+                if (cursor) {
+                    cumulativeScore += cursor.value.score;
+                    cursor.continue();
                 } else {
-                    resolve(0); // If no data found for user or category, return 0
+                    // No more entries, return the cumulative score
+                    resolve(cumulativeScore);
                 }
             };
 
-            getRequest.onerror = (event_1) => {
-                reject(event_1.target.error);
+            index.openCursor(IDBKeyRange.only(username)).onerror = function(event) {
+                console.error("Cursor error: ", event.target.errorCode);
+                reject("Cursor error: " + event.target.errorCode);
             };
-        });
-    }
+        };
 
-const username = 'valere'
-const category = 'Music'
+        request.onupgradeneeded = function(event) {
+            const db = event.target.result;
+            if (!db.objectStoreNames.contains("Users")) {
+                const userIdDB = db.createObjectStore("Users", { keyPath: "username" });
+                userIdDB.createIndex("password", "password", { unique: false });
+                console.log("Object store 'Users' created");
+            }
+            if (!db.objectStoreNames.contains("Scores")) {
+                const scorestore = db.createObjectStore("Scores", { keyPath: "id", autoIncrement: true });
+                scorestore.createIndex("username", "username", { unique: false });
+                scorestore.createIndex('category', 'category', { unique: false });
+                scorestore.createIndex('score', 'score', { unique: false });
+                console.log("Object store 'Scores' created");
+            }
+        };
+    });
+}
 
-getCumulatedScore(username, category).then((cumulatedScore) => {
-    console.log(`Cumulated score for ${username} in ${category}:`, cumulatedScore);
-}).catch((error) => {
-    console.error('Error retrieving cumulated score:', error);
-});
+// Usage
+getCumulativeScore('someUsername')
+    .then(cumulativeScore => {
+        console.log('Cumulative Score:', cumulativeScore);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });

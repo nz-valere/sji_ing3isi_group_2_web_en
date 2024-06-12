@@ -77,21 +77,51 @@ body{
   height: auto;
 }
 #Sports, #Culture, #Music, #Science, #History, #Computer{
-  display: none;
   color: #874CCC;
-  /* font-family: super pixel; */
+  font-family: 'Times New Roman', Times, serif;
   display: flex;
-  /* justify-content: space-between; */
   width: 100%;
+  display: none;
 }
 .img{
   margin-left: 70px;
   width: 50vw;
   height: fit-content;
+  display: flex;
 }
 .img img{
   width: 30%;
 }
 h5{
   color: black;
+}
+.pla{
+  margin-left: 20px;
+  border-left: solid 1.5px black;
+  padding-left: 5px;
+}
+.btn{
+  padding: 5px;
+  border-radius: 5px;
+  background: #080404;
+  color: aliceblue;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: background 0.3s, border-color 0.7s;
+}
+.btn:hover{
+  background-color: #fa517c;
+  color: #333;
+}
+#add-player-btn{
+  border: 3px solid black;
+  border-radius: 5px;
+  margin-top: 10px;
+  transition: background 0.5s;
+}
+#add-player-btn:hover{
+  background-color: #fa517c;
+  color: #333;
+  border: none;
+  /* border: transparent; */
 }
