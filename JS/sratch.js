@@ -69,22 +69,6 @@ $(document).ready(function() {
           $('.img img').attr('src', `../Assets/images/${click}.png`);
       });
 
-      $('.btn').on('click', function() {
-          $('.parent').css('display', 'none');
-          $('.container1').slideToggle().animate();
-          scoreContainer.hide();
-          startQuiz();
-      });
-
-      $('.restart').on('click', function() {
-          $('.container1').css('display', 'none');
-          $('.container1').slideToggle().animate();
-          scoreContainer.hide();
-          currentQuestionIndex = 0; // Reset the question index for the new quiz
-          score = 0; // Reset the score for the new quiz
-          startQuiz();
-      });
-
       peer.on('open', function(id) {
           console.log('My peer ID is: ' + id);
           $('.id').text(id);
@@ -318,47 +302,58 @@ $(document).ready(function() {
 
       // Function to end the quiz
       function endQuiz() {
-          clearInterval(timer);
-          quizContainer.hide();
-          scoreContainer.show();
-          scoreTextElement.text(`You scored ${score} out of ${questions.length * 3}`);
-          const username = sessionStorage.getItem('username');
-          const category = currentCategory;
-
-          if (username) {
-              const scoreData = {
-                  username: username,
-                  category: category,
-                  score: score,
-                  date: new Date().toISOString()
-              };
-              addScore(scoreData).then(() => {
-                  console.log('Score saved successfully');
-              }).catch((error) => {
-                  console.error('Error saving score:', error);
-              });
-          } else {
-              alert('No username found. Please log in.');
-              window.location.href = '../HTML/index.html'; // Redirect to login page if no username is found
-          }
-      }
-
-      // Function to save the score
-      function addScore(scoreData) {
-          return new Promise((resolve, reject) => {
-              const transaction = db.transaction(["Scores"], "readwrite");
-              const store = transaction.objectStore("Scores");
-              const request = store.add(scoreData);
-
-              request.onsuccess = () => {
-                  resolve('Score added successfully');
-              };
-
-              request.onerror = (event) => {
-                  reject('Error adding score:', event);
-              };
-          });
-      }
+        clearInterval(timer);
+        quizContainer.hide();
+        scoreContainer.show();
+        scoreTextElement.text(`You scored ${score} out of ${questions.length * 3}`);
+        const username = sessionStorage.getItem('username');
+        const category = currentCategory;
+    
+        if (username) {
+            const scoreData = {
+                username: username,
+                category: category,
+                score: score,
+                date: new Date().toISOString()
+            };
+            addScore(scoreData).then(() => {
+                console.log('Score saved successfully');
+            }).catch((error) => {
+                console.error('Error saving score:', error);
+            });
+        } else {
+            alert('No username found. Please log in.');
+            window.location.href = '../HTML/index.html'; // Redirect to login page if no username is found
+        }
+    }
+    
+    // Function to save the score
+    function addScore(scoreData) {
+        return new Promise((resolve, reject) => {
+            const request = indexedDB.open("UserIdDB", 3);
+    
+            request.onerror = function(event) {
+                console.error("Database error: ", event.target.errorCode);
+                reject("Database error: " + event.target.errorCode);
+            };
+    
+            request.onsuccess = function(event) {
+                const db = event.target.result;
+                const transaction = db.transaction(["Scores"], "readwrite");
+                const store = transaction.objectStore("Scores");
+                const addRequest = store.add(scoreData);
+    
+                addRequest.onsuccess = () => {
+                    resolve('Score added successfully');
+                    alert('score added to DB');
+                };
+    
+                addRequest.onerror = (event) => {
+                    reject('Error adding score:', event);
+                };
+            };
+        });
+    }
   }).fail(() => {
       alert('Error loading categories.');
   });

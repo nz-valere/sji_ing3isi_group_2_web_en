@@ -25,7 +25,7 @@ const updateProgress = (value) => {
 // updateProgress()
 
 // Function to load the next question
-const loadQuestion = () => {
+const loadQues = () => {
     if (currentQuestionIndex < questions.length) {
         const currentQuestion = questions[currentQuestionIndex];
         questionsElement.text(currentQuestion.question);
@@ -41,7 +41,7 @@ const loadQuestion = () => {
         totalQuestionsElement.text(questions.length);
         resetTimer();
     } else {
-        endQuiz();
+        endQz();
     }
 };
 
@@ -54,7 +54,7 @@ const checkAnswer = (selectedAnswer, correctAnswer) => {
     }
     currentQuestionIndex++;
     changeBackgroundColor();
-    loadQuestion();
+    loadQues();
 };
 
 // Function to reset the timer for each question
@@ -69,7 +69,7 @@ const resetTimer = () => {
         if (time <= 0) {
             clearInterval(timer);
             currentQuestionIndex++;
-            loadQuestion();
+            loadQues();
         }
     }, 1000);
 };
@@ -83,24 +83,25 @@ const changeBackgroundColor = () => {
 };
 
 // Function to end the quiz and show the score
-const endQuiz = () => {
+const endQz = () => {
     clearInterval(timer);
     quizContainer.hide();
     scoreContainer.show();
-    scoreTextElement.text(`You scored ${score} out of --`);
+    scoreTextElement.text(`You scored ${score} out of ${questions.length * 3}`);
 };
 
-const startQuiz = () => {
+const start = () => {
     $.getJSON('../HTML/questions.json', (data) => {
         questions = data.categories[0].questions;
     }).fail(() => {
         console.log('Error');
     }).then(() => {
-        loadQuestion();
+        loadQues();
     });
 };
 
-$(document).ready(() => {
+$('btn').on('click', function () {
+    console.log('hello');
     scoreContainer.hide();
-    startQuiz();
+    start();
 });
