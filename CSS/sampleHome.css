@@ -17,7 +17,7 @@ body {
     height: auto;
     margin: 40px auto;
     box-shadow: 2px 5px 10px #1111111f;
-    padding: 20px;
+    padding: 0px;
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.58);
     overflow: hidden;
@@ -34,6 +34,7 @@ body {
     border-radius: 0px 0px 20px 20px;
     background-color: transparent;
     animation: slideInDown 1s ease-in-out;
+    margin: 0;
 }
 
 @keyframes slideInDown {
@@ -136,6 +137,7 @@ body {
     text-align: center;
     font-size: 1.5rem;
     animation: fadeInLeft 1s ease-in-out;
+    margin-top: 5em;
 }
 
 @keyframes fadeInLeft {
@@ -149,7 +151,7 @@ body {
     position: relative;
     background-color: transparent;
     color: white;
-    width: 100px;
+    width: 10em;
     height: 40px;
     font-size: large;
     margin: 10px auto;
@@ -169,7 +171,7 @@ body {
     position: relative;
     background-color: transparent;
     color: white;
-    width: 30%;
+    width: fit-content;
     height: 70%;
     border: none;
 }

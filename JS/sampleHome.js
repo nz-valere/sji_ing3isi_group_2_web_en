@@ -1,8 +1,8 @@
 const carousel = document.querySelector(".carousel"),
 firstImg = carousel.querySelectorAll("img")[0],
 arrowIcons = document.querySelectorAll(".wrapper i");
-
 let isDragStart = false, isDragging = false, prevPageX, prevScrollLeft, positionDiff, autoScrollInterval;
+
 
 const showHideIcons = () => {
     let scrollWidth = carousel.scrollWidth - carousel.clientWidth;
@@ -88,3 +88,4 @@ carousel.addEventListener("mouseleave", startAutoScroll);
 showHideIcons();
 updateProgressIndicator();
 startAutoScroll();
+
