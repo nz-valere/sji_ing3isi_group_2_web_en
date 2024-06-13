@@ -1,63 +1,71 @@
-function getCumulativeScore(username, category) {
-  return new Promise((resolve, reject) => {
-      const request = indexedDB.open("UserIdDB", 3);
+$(document).ready(function() {
+    const categoryListElement = $('.category-list');
+    const scoreBodyElement = $('#score-body');
+    const categoryTitleElement = $('.category-title');
 
-      request.onerror = function(event) {
-          console.error("Database error: ", event.target.errorCode);
-          reject("Database error: " + event.target.errorCode);
-      };
+    // Fetch and display categories
+    function loadCategories() {
+        $.getJSON('../HTML/questions.json', function(data) {
+            const categories = data.categories;
+            categories.forEach(category => {
+                const categoryButton = $(`<button class="category-button">${category.name}</button>`);
+                categoryButton.on('click', function() {
+                    loadScores(category.name);
+                });
+                categoryListElement.append(categoryButton);
+            });
+        }).fail(() => {
+            console.error('Error loading categories.');
+        });
+    }
 
-      request.onsuccess = function(event) {
-          const db = event.target.result;
-          const transaction = db.transaction(["Scores"], "readonly");
-          const scoreStore = transaction.objectStore("Scores");
+    // Fetch and display scores for a category
+    function loadScores(category) {
+        const request = indexedDB.open("UserIdDB", 3);
 
-          const index = scoreStore.index("username");
-          const userScores = [];
+        request.onerror = function(event) {
+            console.error("Database error: ", event.target.errorCode);
+        };
 
-          index.openCursor(IDBKeyRange.only(username)).onsuccess = function(event) {
-              const cursor = event.target.result;
-              if (cursor) {
-                  if (cursor.value.category === category) {
-                      userScores.push(cursor.value.score);
-                  }
-                  cursor.continue();
-              } else {
-                  // No more entries, calculate the cumulative score
-                  const cumulativeScore = userScores.reduce((acc, score) => acc + score, 0);
-                  resolve(cumulativeScore);
-              }
-          };
+        request.onsuccess = function(event) {
+            const db = event.target.result;
+            const transaction = db.transaction(["Scores"], "readonly");
+            const store = transaction.objectStore("Scores");
+            const index = store.index("category");
+            const scores = [];
 
-          index.openCursor(IDBKeyRange.only(username)).onerror = function(event) {
-              console.error("Cursor error: ", event.target.errorCode);
-              reject("Cursor error: " + event.target.errorCode);
-          };
-      };
+            index.openCursor(IDBKeyRange.only(category)).onsuccess = function(event) {
+                const cursor = event.target.result;
+                if (cursor) {
+                    scores.push(cursor.value);
+                    cursor.continue();
+                } else {
+                    displayScores(category, scores);
+                }
+            };
 
-      request.onupgradeneeded = function(event) {
-          const db = event.target.result;
-          if (!db.objectStoreNames.contains("Users")) {
-              const userIdDB = db.createObjectStore("Users", { keyPath: "username" });
-              userIdDB.createIndex("password", "password", { unique: false });
-              console.log("Object store 'Users' created");
-          }
-          if (!db.objectStoreNames.contains("Scores")) {
-              const scorestore = db.createObjectStore("Scores", { keyPath: "id", autoIncrement: true });
-              scorestore.createIndex("username", "username", { unique: false });
-              scorestore.createIndex('category', 'category', { unique: false });
-              scorestore.createIndex('score', 'score', { unique: false });
-              console.log("Object store 'Scores' created");
-          }
-      };
-  });
-}
+            index.openCursor(IDBKeyRange.only(category)).onerror = function(event) {
+                console.error('Cursor error: ', event.target.errorCode);
+            };
+        };
+    }
 
-// Usage
-getCumulativeScore('someUsername', 'someCategory')
-  .then(cumulativeScore => {
-      console.log('Cumulative Score:', cumulativeScore);
-  })
-  .catch(error => {
-      console.error('Error:', error);
-  });
+    // Display scores in descending order
+    function displayScores(category, scores) {
+        scores.sort((a, b) => b.score - a.score);
+        categoryTitleElement.text(`Scores for ${category}`);
+        scoreBodyElement.empty();
+        scores.forEach(score => {
+            const row = $(`
+                <tr>
+                    <td>${score.username}</td>
+                    <td>${score.score}</td>
+                    <td>${new Date(score.date).toLocaleString()}</td>
+                </tr>
+            `);
+            scoreBodyElement.append(row);
+        });
+    }
+
+    loadCategories();
+});
